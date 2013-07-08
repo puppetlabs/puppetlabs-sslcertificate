@@ -20,5 +20,80 @@ describe 'sslcertificate', :type => :define do
       'onlyif'  => "#{powershell} -Command \"Import-Module WebAdministration; if(Get-ChildItem cert:\\ -Recurse | Where-Object {\$_.FriendlyName -match \\\"testCert\\\" } | Select-Object -First 1) { exit 1 } else { exit 0 }\"",
     })}
   end
+
+  describe 'when no certificate name is provided' do
+    let(:title) { 'certificate-testCert' }
+    let(:params) { {
+        :password   => 'testPass',
+        :location   => 'C:\SslCertificates',
+        :root_store => 'LocalMachine',
+        :store_dir  => 'My',
+    }}
+
+    it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass name to Sslcertificate\[certificate-testCert\]/) }
+  end
+
+  describe 'when empty certificate name is provided' do
+    let(:title) { 'certificate-testCert' }
+    let(:params) { {
+        :name       => '',
+        :password   => 'testPass',
+        :location   => 'C:\SslCertificates',
+        :root_store => 'LocalMachine',
+        :store_dir  => 'My',
+    }}
+
+    it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass name to sslcertificate/) }
+  end
+
+  describe 'when no certificate password is provided' do
+    let(:title) { 'certificate-testCert' }
+    let(:params) { {
+        :name       => 'testCert',
+        :location   => 'C:\SslCertificates',
+        :root_store => 'LocalMachine',
+        :store_dir  => 'My',
+    }}
+
+    it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass password to Sslcertificate\[certificate-testCert\]/) }
+  end
+
+  describe 'when empty certificate password is provided' do
+    let(:title) { 'certificate-testCert' }
+    let(:params) { {
+        :name       => 'testCert',
+        :password   => '',
+        :location   => 'C:\SslCertificates',
+        :root_store => 'LocalMachine',
+        :store_dir  => 'My',
+    }}
+
+    it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass password to sslcertificate/) }
+  end
+
+  describe 'when no certificate location is provided' do
+    let(:title) { 'certificate-testCert' }
+    let(:params) { {
+        :name       => 'testCert',
+        :password   => 'testPass',
+        :root_store => 'LocalMachine',
+        :store_dir  => 'My',
+    }}
+
+    it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass location to Sslcertificate\[certificate-testCert\]/) }
+  end
+
+  describe 'when empty certificate location is provided' do
+    let(:title) { 'certificate-testCert' }
+    let(:params) { {
+        :name       => 'testCert',
+        :password   => 'testPass',
+        :location   => '',
+        :root_store => 'LocalMachine',
+        :store_dir  => 'My',
+    }}
+
+    it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass location to sslcertificate/) }
+  end
 end
 

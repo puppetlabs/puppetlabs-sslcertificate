@@ -1,6 +1,10 @@
 define sslcertificate($name, $password, $location, $root_store = 'LocalMachine', $store_dir = 'My') {
   include 'sslcertificate::param::powershell'
 
+  validate_re($name, ['^(.)+$'],"Must pass name to ${module_name}\[${title}\]")
+  validate_re($password, ['^(.)+$'],"Must pass password to ${module_name}\[${title}\]")
+  validate_re($location, ['^(.)+$'],"Must pass location to ${module_name}\[${title}\]")
+
   $filename = "${name}.pfx"
   $cert_path = "${location}\\${filename}"
 
