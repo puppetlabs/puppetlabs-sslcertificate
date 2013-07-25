@@ -1,4 +1,4 @@
-define sslcertificate($name, $password, $location, $root_store = 'LocalMachine', $store_dir = 'My') {
+define sslcertificate($name, $password, $location, $root_store = 'LocalMachine', $store_dir = 'My', $filename = "${name}.pfx") {
   validate_re($name, ['^(.)+$'],"Must pass name to ${module_name}\[${title}\]")
   validate_re($password, ['^(.)+$'],"Must pass password to ${module_name}\[${title}\]")
   validate_re($location, ['^(.)+$'],"Must pass location to ${module_name}\[${title}\]")
@@ -6,7 +6,6 @@ define sslcertificate($name, $password, $location, $root_store = 'LocalMachine',
   $ps_command = 'powershell.exe -ExecutionPolicy RemoteSigned'
   $ps_path = 'C:\Windows\sysnative\WindowsPowershell\v1.0'
 
-  $filename = "${name}.pfx"
   $cert_path = "${location}\\${filename}"
 
   exec { "Install-SSL-Certificate-${name}":
