@@ -12,18 +12,18 @@ define sslcertificate($name, $password, $location, $root_store = 'LocalMachine',
   file { "inspect-${name}-certificate.ps1" :
     ensure  => present,
     path    => "C:\\temp\\inspect-${name}.ps1",
-    content => template('sslcert/inspect.ps1.erb'),
+    content => template('sslcertificate/inspect.ps1.erb'),
     require => File['C:\temp']
   }
 
   file { "import-${name}-certificate.ps1" :
     ensure  => present,
     path    => "C:\\temp\\import-${name}.ps1",
-    content => template('sslcert/import.ps1.erb'),
+    content => template('sslcertificate/import.ps1.erb'),
     require => File['C:\temp']
   }
 
-  exec { "Install SSL Cert":
+  exec { "Install-${name}-SSLCert":
     provider  => powershell,
     command   => "c:\\temp\\import-${name}.ps1",
     onlyif    => "c:\\temp\\inspect-${name}.ps1",
