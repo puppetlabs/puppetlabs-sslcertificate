@@ -13,39 +13,28 @@ describe 'sslcertificate', :type => :define do
         :store_dir  => 'My',
     } }
 
-    it { should contain_exec('Install-SSL-Certificate-testCert').with ({
-      'command' => "#{powershell} -Command \"Import-Module WebAdministration; \$pfx = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2; \$pfxPass = ConvertTo-SecureString \\\"testPass\\\" -asplaintext -force; \$pfx.import(\\\"C:\\SslCertificates\\testCert.pfx\\\",\$pfxPass,\\\"Exportable,PersistKeySet\\\"); \$store = New-Object System.Security.Cryptography.X509Certificates.X509Store(\\\"My\\\", \\\"LocalMachine\\\"); \$store.open(\\\"MaxAllowed\\\"); \$store.add(\$pfx); \$store.close();\"",
-      'onlyif'  => "#{powershell} -Command \"Import-Module WebAdministration; if(Get-ChildItem cert:\\ -Recurse | Where-Object {\$_.FriendlyName -match \\\"testCert\\\" } | Select-Object -First 1) { exit 1 } else { exit 0 }\"",
-    })}
-  end
+    it { should contain_exec('Install-testCert-SSLCert')
+      .with_command('c:\temp\import-testCert.ps1')
+      .with_onlyif('c:\temp\inspect-testCert.ps1')
+      .with_provider('powershell')
+      .with_require('File[import-testCert-certificate.ps1]')
+      .with_require('File[inspect-testCert-certificate.ps1]')
+    }
 
-  describe 'when managing a ssl certificate and supplying a filename' do
-    let(:title) { 'certificate-testCert' }
-    let(:params) { {
-        :name       => 'testCert',
-        :password   => 'testPass',
-        :location   => 'C:\SslCertificates',
-        :root_store => 'LocalMachine',
-        :store_dir  => 'My',
-        :filename   => 'testCertFile.pfx'
-    } }
+    it{ should contain_file('import-testCert-certificate.ps1')
+      .with_ensure('present')
+      .with_path('C:\\temp\\import-testCert.ps1')
+      .with_content(/store.Add/)
+      .with_require('File[C:\temp]')
+    }
 
-    it { should contain_exec('Install-SSL-Certificate-testCert').with ({
-        'command' => "#{powershell} -Command \"Import-Module WebAdministration; \$pfx = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2; \$pfxPass = ConvertTo-SecureString \\\"testPass\\\" -asplaintext -force; \$pfx.import(\\\"C:\\SslCertificates\\testCertFile.pfx\\\",\$pfxPass,\\\"Exportable,PersistKeySet\\\"); \$store = New-Object System.Security.Cryptography.X509Certificates.X509Store(\\\"My\\\", \\\"LocalMachine\\\"); \$store.open(\\\"MaxAllowed\\\"); \$store.add(\$pfx); \$store.close();\"",
-        'onlyif'  => "#{powershell} -Command \"Import-Module WebAdministration; if(Get-ChildItem cert:\\ -Recurse | Where-Object {\$_.FriendlyName -match \\\"testCert\\\" } | Select-Object -First 1) { exit 1 } else { exit 0 }\"",
-    })}
-  end
+    it{ should contain_file('inspect-testCert-certificate.ps1')
+      .with_ensure('present')
+      .with_path('C:\\temp\\inspect-testCert.ps1')
+      .with_content(/\$installedCert in \$installedCerts/)
+      .with_require('File[C:\temp]')
+    }
 
-  describe 'when no certificate name is provided' do
-    let(:title) { 'certificate-testCert' }
-    let(:params) { {
-        :password   => 'testPass',
-        :location   => 'C:\SslCertificates',
-        :root_store => 'LocalMachine',
-        :store_dir  => 'My',
-    }}
-
-    it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass name to Sslcertificate\[certificate-testCert\]/) }
   end
 
   describe 'when empty certificate name is provided' do

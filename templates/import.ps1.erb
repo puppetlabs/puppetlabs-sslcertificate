@@ -1,0 +1,21 @@
+$pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2
+
+$pfxPass = convertto-securestring <%= @password %> -asplaintext -force
+$cert = gi <%= @location %>/<%= @name %>
+
+switch -regex ($cert.Extension.ToUpper()) {
+    ".CER|.DER|.PFX" {
+        $pfx.import($cert,$pfxPass,"Exportable,PersistKeySet")
+    }
+    ".P7B|.SST" {
+        $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
+        $pfx.Import([System.IO.File]::ReadAllBytes($cert))
+    }
+}
+
+$store = new-object System.Security.Cryptography.X509Certificates.X509Store(<%= @store_dir %>,<%= @root_store %>)
+$store.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
+
+$pfx | %{$store.Add($_)}
+
+$store.close()
