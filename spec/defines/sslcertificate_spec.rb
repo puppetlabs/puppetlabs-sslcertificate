@@ -17,24 +17,23 @@ describe 'sslcertificate', :type => :define do
       .with_command('c:\temp\import-testCert.ps1')
       .with_onlyif('c:\temp\inspect-testCert.ps1')
       .with_provider('powershell')
-      .that_requires('File[import-testCert-certificate.ps1]')
-      .that_requires('File[inspect-testCert-certificate.ps1]')
+      .with_require('File[import-testCert-certificate.ps1]')
+      .with_require('File[inspect-testCert-certificate.ps1]')
     }
 
     it{ should contain_file('import-testCert-certificate.ps1')
       .with_ensure('present')
       .with_path('C:\\temp\\import-testCert.ps1')
       .with_content(/store.Add/)
-      .that_requires('File[C:\temp]')
+      .with_require('File[C:\temp]')
     }
 
     it{ should contain_file('inspect-testCert-certificate.ps1')
       .with_ensure('present')
       .with_path('C:\\temp\\inspect-testCert.ps1')
       .with_content(/\$installedCert in \$installedCerts/)
-      .that_requires('File[C:\temp]')
+      .with_require('File[C:\temp]')
     }
-
 
   end
 
