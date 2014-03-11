@@ -1,17 +1,33 @@
-define sslcertificate($name, $password, $location, $root_store = 'LocalMachine', $store_dir = 'My', $filename = "${name}.pfx") {
+define sslcertificate($name, $password, $location, $root_store = 'LocalMachine', $store_dir = 'My') {
   validate_re($name, ['^(.)+$'],"Must pass name to ${module_name}\[${title}\]")
   validate_re($password, ['^(.)+$'],"Must pass password to ${module_name}\[${title}\]")
   validate_re($location, ['^(.)+$'],"Must pass location to ${module_name}\[${title}\]")
 
-  $ps_command = 'powershell.exe -ExecutionPolicy RemoteSigned'
-  $ps_path = 'C:\Windows\sysnative\WindowsPowershell\v1.0'
+  if ! defined(File['C:\temp']) {
+    file { 'C:\temp':
+      ensure => directory,
+    }
+  }
 
-  $cert_path = "${location}\\${filename}"
+  file { "inspect-${name}-certificate.ps1" :
+    ensure  => present,
+    path    => "C:\\temp\\inspect-${name}.ps1",
+    content => template('sslcert/inspect.ps1.erb'),
+    require => File['C:\temp']
+  }
 
-  exec { "Install-SSL-Certificate-${name}":
-    path      => "${ps_path};${::path}",
-    command   => "${ps_command} -Command \"Import-Module WebAdministration; \$pfx = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2; \$pfxPass = ConvertTo-SecureString \\\"${password}\\\" -asplaintext -force; \$pfx.import(\\\"${cert_path}\\\",\$pfxPass,\\\"Exportable,PersistKeySet\\\"); \$store = New-Object System.Security.Cryptography.X509Certificates.X509Store(\\\"${store_dir}\\\", \\\"${root_store}\\\"); \$store.open(\\\"MaxAllowed\\\"); \$store.add(\$pfx); \$store.close();\"",
-    onlyif    => "${ps_command} -Command \"Import-Module WebAdministration; if(Get-ChildItem cert:\\ -Recurse | Where-Object {\$_.FriendlyName -match \\\"${name}\\\" } | Select-Object -First 1) { exit 1 } else { exit 0 }\"",
+  file { "import-${name}-certificate.ps1" :
+    ensure  => present,
+    path    => "C:\\temp\\import-${name}.ps1",
+    content => template('sslcert/import.ps1.erb'),
+    require => File['C:\temp']
+  }
+
+  exec { "Install SSL Cert":
+    provider  => powershell,
+    command   => "c:\\temp\\import-${name}.ps1",
+    onlyif    => "c:\\temp\\inspect-${name}.ps1",
     logoutput => true,
+    require   => File["inspect-${name}-certificate.ps1", "import-${name}-certificate.ps1"],
   }
 }
