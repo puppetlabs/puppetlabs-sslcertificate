@@ -10,4 +10,3 @@ gem 'rspec-mocks', '2.13.1'
 gem 'puppet', '3.2.1'
 gem 'rspec-puppet', '0.1.6'
 gem 'puppetlabs_spec_helper', '0.4.1'
-
