@@ -5,7 +5,7 @@ $pfxPass = convertto-securestring <%= @password %> -asplaintext -force
 $certificate = gi <%= @location %>\<%= @name %>
 switch -regex ($certificate.Extension.ToUpper()) {
     ".CER|.DER|.PFX" {
-        $pfx.import("<%= @name %>",$pfxPass,"Exportable,PersistKeySet")
+        $pfx.import("<%= @location %>\\<%= @name %>",$pfxPass,"Exportable,PersistKeySet")
     }
     ".P7B|.SST" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
