@@ -5,7 +5,7 @@ $cert = gi <%= @location %>/<%= @name %>
 
 switch -regex ($cert.Extension.ToUpper()) {
     ".CER|.DER|.PFX" {
-        $pfx.import($cert,$pfxPass,"Exportable,PersistKeySet")
+        $pfx.import("<%= @location %>\\<%= @name %>",$pfxPass,"Exportable,PersistKeySet")
     }
     ".P7B|.SST" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
@@ -13,7 +13,7 @@ switch -regex ($cert.Extension.ToUpper()) {
     }
 }
 
-$store = new-object System.Security.Cryptography.X509Certificates.X509Store(<%= @store_dir %>,<%= @root_store %>)
+$store = new-object System.Security.Cryptography.X509Certificates.X509Store("<%= @store_dir %>","<%= @root_store %>")
 $store.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
 
 $pfx | %{$store.Add($_)}
