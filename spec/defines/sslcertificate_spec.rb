@@ -17,8 +17,7 @@ describe 'sslcertificate', :type => :define do
       .with_command('c:\temp\import-testCert.ps1')
       .with_onlyif('c:\temp\inspect-testCert.ps1')
       .with_provider('powershell')
-      .with_require('File[import-testCert-certificate.ps1]')
-      .with_require('File[inspect-testCert-certificate.ps1]')
+      .with_require('[File[inspect-testCert-certificate.ps1]{:path=>"inspect-testCert-certificate.ps1"}, File[import-testCert-certificate.ps1]{:path=>"import-testCert-certificate.ps1"}]')
     }
 
     it{ should contain_file('import-testCert-certificate.ps1')
@@ -60,19 +59,6 @@ describe 'sslcertificate', :type => :define do
     }}
 
     it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass password to Sslcertificate\[certificate-testCert\]/) }
-  end
-
-  describe 'when empty certificate password is provided' do
-    let(:title) { 'certificate-testCert' }
-    let(:params) { {
-        :name       => 'testCert',
-        :password   => '',
-        :location   => 'C:\SslCertificates',
-        :root_store => 'LocalMachine',
-        :store_dir  => 'My',
-    }}
-
-    it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass password to sslcertificate/) }
   end
 
   describe 'when no certificate location is provided' do
