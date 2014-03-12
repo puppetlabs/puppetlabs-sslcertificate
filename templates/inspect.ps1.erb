@@ -2,27 +2,31 @@ $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2
 
 $pfxPass = convertto-securestring <%= @password %> -asplaintext -force
 
-$certificate = gi <%= @location %>/<%= @name %>
+$certificate = gi <%= @location %>\<%= @name %>
 switch -regex ($certificate.Extension.ToUpper()) {
     ".CER|.DER|.PFX" {
-        $pfx.import(<%= @name %>,$pfxPass,"Exportable,PersistKeySet")
+        $pfx.import("<%= @name %>",$pfxPass,"Exportable,PersistKeySet")
     }
     ".P7B|.SST" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
-        $pfx.Import([System.IO.File]::ReadAllBytes(<%= @name %>))
+        $pfx.Import([System.IO.File]::ReadAllBytes("<%= @name %>"))
     }
 }
 
-$installedCerts = Get-ChildItem -R cert:\<%= @root_store %>\<%= @store_dir %>;
+$installedCerts = @(Get-ChildItem -R cert:\<%= @root_store %>\<%= @store_dir %>)
 
-foreach($cert in $pfx)
-{
-    foreach ($installedCert in $installedCerts) {
-        if($installedCert.Thumbprint -eq $cert.Thumbprint) {
-            exit 1
+if (($pfx -ne $null) -and ($installedCerts.Length -gt 0)) {
+    foreach($cert in $pfx)
+    {
+        foreach ($installedCert in $installedCerts) {
+            if($installedCert.Thumbprint -eq $cert.Thumbprint) {
+                exit 1
+            }
         }
     }
+exit 0
 }
+
 exit 0
 
 
