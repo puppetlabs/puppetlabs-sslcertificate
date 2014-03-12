@@ -1,4 +1,4 @@
-name 'opentable/sslcertificate
+name 'opentable/sslcertificate'
 version '1.0.0'
 author 'opentable'
 license 'MIT'
