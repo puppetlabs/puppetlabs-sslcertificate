@@ -9,7 +9,7 @@ switch -regex ($certificate.Extension.ToUpper()) {
     }
     ".P7B|.SST" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
-        $pfx.Import([System.IO.File]::ReadAllBytes("<%= @name %>"))
+        $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\\<%= @name %>"))
     }
 }
 
