@@ -27,6 +27,6 @@ define sslcertificate($name, $password, $location, $root_store = 'LocalMachine',
     command   => "c:\\temp\\import-${name}.ps1",
     onlyif    => "c:\\temp\\inspect-${name}.ps1",
     logoutput => true,
-    require   => [File["inspect-${name}-certificate.ps1"], File["import-${name}-certificate.ps1"]],
+    require   => [File["inspect-${name}-certificate.ps1"], "import-${name}-certificate.ps1"]],
   }
 }
