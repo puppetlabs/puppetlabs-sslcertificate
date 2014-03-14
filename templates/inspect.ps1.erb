@@ -3,7 +3,7 @@ $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2
 $certificate = gi <%= @location %>\<%= @name %>
 switch -regex ($certificate.Extension.ToUpper()) {
     ".CER|.DER" {
-        $pfx.import("<%= @location %>\\<%= @name %>","<%= @password %> ","Exportable,PersistKeySet")
+        $pfx.import("<%= @location %>\\<%= @name %>","<%= @password %>","Exportable,PersistKeySet")
     }
     ".P7B|.SST" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
@@ -11,7 +11,7 @@ switch -regex ($certificate.Extension.ToUpper()) {
     }
     ".PFX" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
-        $pfx.import("<%= @location %>\\<%= @name %>","<%= @password %> ","Exportable,PersistKeySet")
+        $pfx.import("<%= @location %>\\<%= @name %>","<%= @password %>","Exportable,PersistKeySet")
     }
 }
 
