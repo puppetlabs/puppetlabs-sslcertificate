@@ -3,7 +3,7 @@ $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2
 $cert = gi <%= @location %>/<%= @name %>
 
 switch -regex ($cert.Extension.ToUpper()) {
-    ".CER|.DER" {
+    ".CER|.DER|.P12" {
         $pfx.import("<%= @location %>\\<%= @name %>","<%= @password %>","Exportable,PersistKeySet")
     }
     ".CRT" {
