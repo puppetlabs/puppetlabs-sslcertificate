@@ -42,11 +42,12 @@ Please note, you must download the file to the host before trying to install it.
     }
 
 	sslcertificate { "Install-Intermediate-Certificate" :
-    	name       => 'go_daddy_intermediate.p7b',
-    	location   => 'C:\MyCerts',
-    	store_dir  => 'CA',
-    	root_store => 'LocalMachine',
-    	require    => File['go_daddy_intermediate']
+      name       => 'go_daddy_intermediate.p7b',
+      location   => 'C:\MyCerts',
+      store_dir  => 'CA',
+      root_store => 'LocalMachine',
+      thumbprint => '0DGSDDA778MDHGKAKKDDK883MSAKD772DDD'
+      require    => File['go_daddy_intermediate']
     }   
     
 The system sits on top of PowerShell, so if the PowerShell file cannot get to the certificate, then it will not be able to install it.
