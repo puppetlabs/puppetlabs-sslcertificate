@@ -26,7 +26,7 @@ $installedCertCount = 0
 $installedIntermediateCount = 0
 
 
-if (($pfx -ne $null) -and ($installedCerts -ne $null) -and ($intermediaCerts -ne $null)) {
+if (($pfx -ne $null) -and ($installedCerts -ne $null) -and ($intermediateCerts -ne $null)) {
     foreach($cert in $pfx)
     {
         if($cert.Thumbprint -ne "<%= @thumbprint %>") {
