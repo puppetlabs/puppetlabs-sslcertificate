@@ -14,21 +14,21 @@ Usage
 --
 
     sslcertificate { "Install-PFX-Certificate" :
-    	name       => 'mycert.pfx',
-    	password   => 'password123',
-    	location   => 'C:\',
-    	thumbprint => '07E5C1AF7F5223CB975CC29B5455642F5570798B'
+      name       => 'mycert.pfx',
+      password   => 'password123',
+      location   => 'C:\',
+      thumbprint => '07E5C1AF7F5223CB975CC29B5455642F5570798B'
     }
     
 By default, it will store the certificate in Local Machine root store and in the My directory. If you want to change these, then use the parameters as follows:
 
 
     sslcertificate { "Install-Intermediate-Certificate" :
-    	name       => 'go_daddy_intermediate.p7b',
-    	location   => 'C:\',
-    	store_dir  => 'CA',
-    	root_store => 'LocalMachine',
-        thumbprint => '07E5C1AF7F5223CB975CC29B5455642F5570798B'
+      name       => 'go_daddy_intermediate.p7b',
+      location   => 'C:\',
+      store_dir  => 'CA',
+      root_store => 'LocalMachine',
+      thumbprint => '07E5C1AF7F5223CB975CC29B5455642F5570798B'
     }
     
 For more details on the different options available with certificate management directories, see [Windows Dev Center](http://msdn.microsoft.com/en-us/library/windows/desktop/aa388136(v=vs.85).aspx).
