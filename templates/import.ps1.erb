@@ -22,6 +22,21 @@ switch -regex ($cert.Extension.ToUpper()) {
 $store = new-object System.Security.Cryptography.X509Certificates.X509Store("<%= @store_dir %>","<%= @root_store %>")
 $store.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
 
-$pfx | %{$store.Add($_)}
+$intermediatestore = new-object System.Security.Cryptography.X509Certificates.X509Store("CA","<%= @root_store %>")
+$intermediatestore.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
+
+foreach($cert in $pfx) {
+  if($cert.Thumbprint -ne "<%= @thumbprint %>") {
+      $intermediatestore.Add($cert)
+  }
+  elseif($cert.Thumbprint -eq "<%= @thumbprint %>") {
+      $store.Add($cert)
+  }
+  else {
+    exit 0
+  }
+}
+
+
 
 $store.close()

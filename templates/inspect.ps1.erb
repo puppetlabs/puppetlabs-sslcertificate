@@ -18,20 +18,37 @@ switch -regex ($certificate.Extension.ToUpper()) {
     }
 }
 
-$installedCerts = @(Get-ChildItem -R cert:\<%= @root_store %>\<%= @store_dir %>)
-$installedCertCount = 0
 
-if (($pfx -ne $null) -and ($installedCerts -ne $null)) {
+$installedCerts = @(Get-ChildItem -R cert:\<%= @root_store %>\<%= @store_dir %>)
+$intermediateCerts = @(Get-ChildItem -R cert:\<%= @root_store %>\CA)
+
+$installedCertCount = 0
+$installedIntermediateCount = 0
+
+
+if (($pfx -ne $null) -and ($installedCerts -ne $null) -and ($intermediaCerts -ne $null)) {
     foreach($cert in $pfx)
     {
-        foreach ($installedCert in $installedCerts) {
-            if($installedCert.Thumbprint -eq $cert.Thumbprint) {
-                $installedCertCount ++
+        if($cert.Thumbprint -ne "<%= @thumbprint %>") {
+            foreach ($intermediate in $intermediateCerts) {
+                if($intermediate.Thumbprint -eq $cert.Thumbprint) {
+                    $installedIntermediateCount ++
+                }
             }
+        }
+        elseif ($cert.Thumbprint -eq "<%= @thumbprint %>") {
+            foreach ($installedCert in $installedCerts) {
+                if($installedCert.Thumbprint -eq $cert.Thumbprint) {
+                    $installedCertCount ++
+                }
+            }
+        }
+        else {
+            exit 0
         }
     }
 
-    if ($installedCertCount -eq $pfx.Count) {
+    if (($installedCertCount + $installedIntermediateCount) -eq $pfx.Count) {
         exit 1
     }
     else {
