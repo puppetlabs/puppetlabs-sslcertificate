@@ -1,6 +1,6 @@
 fixtures:
   repositories:
-    stdlib: git://github.com/puppetlabs/puppetlabs-stdlib.git
+    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib
   symlinks:
     sslcertificate: "#{source_dir}"
 
