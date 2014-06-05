@@ -8,6 +8,7 @@ group :test do
   gem "puppet-syntax"
   gem "puppetlabs_spec_helper"
   gem "rspec", "2.99.0"
+  gem "celluloid", "0.11.1" # pinned for 1.8.7 support
 end
 
 group :development do
