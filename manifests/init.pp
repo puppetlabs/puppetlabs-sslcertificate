@@ -4,11 +4,7 @@ define sslcertificate($name, $password, $location, $thumbprint, $root_store = 'L
   validate_re($location, '^(.)+$',"Must pass location to ${module_name}[${title}]")
   validate_re($thumbprint, '^(.)+$', "Must pass a certificate thumbprint to ${module_name}[${title}]")
 
-  if ! defined(File['C:\temp']) {
-    file { 'C:\temp':
-      ensure => directory,
-    }
-  }
+  ensure_resource('file', 'c:\temp', { ensure => directory })
 
   file { "inspect-${name}-certificate.ps1" :
     ensure  => present,
