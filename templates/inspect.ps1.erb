@@ -20,7 +20,7 @@ switch -regex ($certificate.Extension.ToUpper()) {
 
 
 $installedCerts = @(Get-ChildItem -R cert:\<%= @root_store %>\<%= @store_dir %>)
-$intermediateCerts = @(Get-ChildItem -R cert:\<%= @root_store %>\CA)
+$intermediateCerts = @(Get-ChildItem -R cert:\<%= @root_store %>\<%= @store_dir %>)
 
 $installedCertCount = 0
 $installedIntermediateCount = 0
