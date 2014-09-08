@@ -1,0 +1,45 @@
+$pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2
+
+$cert = gi <%= @location %>/<%= @name %>
+$oldway = true;
+switch -regex ($cert.Extension.ToUpper()) {
+    ".CER|.DER" {
+        $pfx.import("<%= @location %>\\<%= @name %>","<%= @password %>","Exportable,PersistKeySet")
+    }
+    ".CRT" {
+        $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\\<%= @name %>"))
+    }
+    ".P7B|.SST" {
+        $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
+        $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\\<%= @name %>"))
+    }
+    ".PFX|.P12" {
+        $oldway = false;
+        if("<%= @password %>" -eq ""){
+            Import-PfxCertificate -FilePath "<%= @location %>\\<%= @name %>" -CertStoreLocation "cert:\<%= @root_store %>\<%= @store_dir %>" -Exportable
+        }else{
+            $cert = ConvertTo-SecureString -String "<%= @password %>" -Force -AsPlainText
+            Import-PfxCertificate -FilePath "<%= @location %>\\<%= @name %>" -Password $cert -CertStoreLocation "cert:\<%= @root_store %>\<%= @store_dir %>" -Exportable
+        }
+    }
+}
+if($oldway){
+  $store = new-object System.Security.Cryptography.X509Certificates.X509Store("<%= @store_dir %>","<%= @root_store %>")
+  $store.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
+
+  $intermediatestore = new-object System.Security.Cryptography.X509Certificates.X509Store("CA","<%= @root_store %>")
+  $intermediatestore.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
+
+  foreach($cert in $pfx) {
+    if($cert.Thumbprint -ne "<%= @thumbprint %>") {
+        $intermediatestore.Add($cert)
+    }
+    elseif($cert.Thumbprint -eq "<%= @thumbprint %>") {
+      $store.Add($cert)
+    }
+    else {
+      exit 0
+    }
+  }
+  $store.close()
+}
