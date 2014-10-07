@@ -1,5 +1,5 @@
 name 'opentable/sslcertificate'
-version '2.0.0'
+version '2.0.299'
 author 'opentable'
 license 'MIT'
 summary 'Puppet module to manage SSL Certificates on WIndows Server 2008 and upwards'
