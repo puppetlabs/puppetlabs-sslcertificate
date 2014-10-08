@@ -1,0 +1,22 @@
+{
+  "name":         "opentable-sslcertificate",
+  "version":      "2.0.0",
+  "author":       "opentable",
+  "license":      "MIT",
+  "summary":      "Module to manage SSL Certificates on Windows Server 2008 and upwards",
+  "source":       "https://github.com/opentable/puppet-sslcert",
+  "project_page": "https://github.com/opentable/puppet-sslcert",
+  "issues_url":   "https://github.com/opentable/puppet-sslcert/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "windows",
+      "operatingsystemrelease": ["6.1.7600","6.1.7601", "6.2.9200", "6.3.9200", "6.3.9600"]
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 3.0.0 <5.0.0"
+    }
+  ]
+}
