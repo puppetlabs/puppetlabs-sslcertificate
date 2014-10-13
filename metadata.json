@@ -1,6 +1,6 @@
 {
   "name":         "opentable-sslcertificate",
-  "version":      "2.0.0",
+  "version":      "2.1.0",
   "author":       "opentable",
   "license":      "MIT",
   "summary":      "Module to manage SSL Certificates on Windows Server 2008 and upwards",
