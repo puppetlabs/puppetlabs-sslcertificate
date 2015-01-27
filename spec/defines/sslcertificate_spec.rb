@@ -13,8 +13,6 @@ describe 'sslcertificate', :type => :define do
     } }
 
     it { should contain_exec('Install-testCert-SSLCert').with(
-      'command'  => 'template("sslcertificate/import.ps1.erb")',
-      'onlyif'   => 'template("sslcertificate/inspect.ps1.erb")',
       'provider' => 'powershell'
     )}
 
