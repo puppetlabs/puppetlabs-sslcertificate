@@ -13,25 +13,11 @@ describe 'sslcertificate', :type => :define do
     } }
 
     it { should contain_exec('Install-testCert-SSLCert').with(
-      'command'  => 'c:\temp\import-testCert.ps1',
-      'onlyif'   => 'c:\temp\inspect-testCert.ps1',
+      'command'  => 'template("sslcertificate/import.ps1.erb")',
+      'onlyif'   => 'template("sslcertificate/inspect.ps1.erb")',
       'provider' => 'powershell'
     )}
 
-    it { should contain_file('import-testCert-certificate.ps1').with(
-      'ensure'  => 'present',
-      'path'    => 'C:\\temp\\import-testCert.ps1',
-      'require' => 'File[C:\temp]'
-    )}
-
-    it { should contain_file('import-testCert-certificate.ps1').with_content(/store.Add/) }
-
-    it { should contain_file('inspect-testCert-certificate.ps1').with(
-      'ensure'  => 'present',
-      'path'    => 'C:\\temp\\inspect-testCert.ps1',
-      'require' => 'File[C:\temp]'
-    )}
-    it { should contain_file('inspect-testCert-certificate.ps1').with_content(/\$installedCert in \$installedCerts/) }
 
   end
 
