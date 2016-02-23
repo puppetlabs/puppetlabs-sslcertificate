@@ -45,7 +45,12 @@ if (($pfx -ne $null) -and ($installedCerts -ne $null) -and ($intermediateCerts -
         }
     }
 
-    if (($installedCertCount + $installedIntermediateCount) -eq $pfx.Count) {
+    # When $pfx.Count is $null, $pfx is an instance of X509Certificate2, not X509Certificate2Collection, so
+    # ensure that only a single certificate has been installed.
+    if (($pfx.Count -eq $null) -and ($installedCertCount -eq 1) -and ($installedIntermediateCount -eq 0)) {
+        exit 1
+    }
+    elseif (($installedCertCount + $installedIntermediateCount) -eq $pfx.Count) {
         exit 1
     }
 }
