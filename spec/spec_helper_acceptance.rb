@@ -29,7 +29,7 @@ Spec.configure do |c|
         c.winrm.set_timeout 300
       end
 
-      path = (File.expand_path(File.dirname(__FILE__) + '/../')).split('/')
+      path = File.expand_path(File.dirname(__FILE__) + '/../').split('/')
       name = path[path.length - 1].split('-')[1]
 
       copy_module_to(host, :source => proj_root, :module_name => name)
