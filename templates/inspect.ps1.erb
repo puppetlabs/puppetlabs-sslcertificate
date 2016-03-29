@@ -36,26 +36,23 @@ if (($pfx -ne $null) -and ($installedCerts -ne $null) -and ($intermediateCerts -
                 }
             }
         }
-        elseif ($cert.Thumbprint -eq "<%= @thumbprint %>") {
+        else {
             foreach ($installedCert in $installedCerts) {
                 if($installedCert.Thumbprint -eq $cert.Thumbprint) {
                     $installedCertCount ++
                 }
             }
         }
-        else {
-            exit 0
-        }
     }
 
-    if (($installedCertCount + $installedIntermediateCount) -eq $pfx.Count) {
+    # When $pfx.Count is $null, $pfx is an instance of X509Certificate2, not X509Certificate2Collection, so
+    # ensure that only a single certificate has been installed.
+    if (($pfx.Count -eq $null) -and ($installedCertCount -eq 1) -and ($installedIntermediateCount -eq 0)) {
         exit 1
     }
-    else {
-        exit 0
+    elseif (($installedCertCount + $installedIntermediateCount) -eq $pfx.Count) {
+        exit 1
     }
 }
-else {
-    exit 0
-}
 
+exit 0
