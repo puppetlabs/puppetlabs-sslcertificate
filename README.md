@@ -33,18 +33,18 @@ A module that will allow you to install and remove your certificates on Windows 
 
   To install a certificate in the My directory of the LocalMachine root store:
 
-    ```puppet
+```puppet
     sslcertificate { "Install-PFX-Certificate" :
       name       => 'mycert.pfx',
       password   => 'password123',
       location   => 'C:\',
       thumbprint => '07E5C1AF7F5223CB975CC29B5455642F5570798B'
     }
-    ```
+```
 
   To install a certifcate in an alterntative direcotory:
 
-    ```puppet
+```puppet
     sslcertificate { "Install-Intermediate-Certificate" :
       name       => 'go_daddy_intermediate.p7b',
       location   => 'C:\',
@@ -52,7 +52,7 @@ A module that will allow you to install and remove your certificates on Windows 
       root_store => 'LocalMachine',
       thumbprint => '07E5C1AF7F5223CB975CC29B5455642F5570798B'
     }
-    ```
+```
 
   For more details on the different options available with certificate management directories, see [Windows Dev Center](http://msdn.microsoft.com/en-us/library/windows/desktop/aa388136(v=vs.85).aspx).
 
