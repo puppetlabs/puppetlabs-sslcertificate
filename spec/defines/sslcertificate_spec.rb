@@ -3,14 +3,16 @@ require 'spec_helper'
 describe 'sslcertificate', type: :define do
   describe 'when managing a ssl certificate' do
     let(:title) { 'certificate-testCert' }
-    let(:params) { {
-      name: 'testCert',
-      password: 'testPass',
-      location: 'C:\SslCertificates',
-      thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-      root_store: 'LocalMachine',
-      store_dir: 'My',
-    } }
+    let(:params) do
+      {
+        name: 'testCert',
+        password: 'testPass',
+        location: 'C:\SslCertificates',
+        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+        root_store: 'LocalMachine',
+        store_dir: 'My'
+      }
+    end
 
     it do
       should contain_exec('Install-testCert-SSLCert').with(
@@ -28,7 +30,7 @@ describe 'sslcertificate', type: :define do
       )
     end
 
-    it { should contain_file('import-testCert-certificate.ps1').with_content(/store.Add/) }
+    it { should contain_file('import-testCert-certificate.ps1').with_content(%r{store.Add}) }
 
     it do
       should contain_file('inspect-testCert-certificate.ps1').with(
@@ -37,21 +39,23 @@ describe 'sslcertificate', type: :define do
         'require' => 'File[C:\temp]'
       )
     end
-    it { should contain_file('inspect-testCert-certificate.ps1').with_content(/\$installedCert in \$installedCerts/) }
+    it { should contain_file('inspect-testCert-certificate.ps1').with_content(%r{\$installedCert in \$installedCerts}) }
   end
 
   describe 'when empty certificate name is provided' do
     let(:title) { 'certificate-testCert' }
-    let(:params) { {
-      name: '',
-      password: 'testPass',
-      location: 'C:\SslCertificates',
-      thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-      root_store: 'LocalMachine',
-      store_dir: 'My',
-    }}
+    let(:params) do
+      {
+        name: '',
+        password: 'testPass',
+        location: 'C:\SslCertificates',
+        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+        root_store: 'LocalMachine',
+        store_dir: 'My'
+      }
+    end
 
-    it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, /Must pass name to sslcertificate/) }
+    it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, %r{Must pass name to sslcertificate}) }
   end
 
   # TODO: this needs to be corrected
@@ -69,40 +73,46 @@ describe 'sslcertificate', type: :define do
 
   describe 'when no certificate location is provided' do
     let(:title) { 'certificate-testCert' }
-    let(:params) { {
-      name: 'testCert',
-      password: 'testPass',
-      thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-      root_store: 'LocalMachine',
-      store_dir: 'My',
-    }}
+    let(:params) do
+      {
+        name: 'testCert',
+        password: 'testPass',
+        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+        root_store: 'LocalMachine',
+        store_dir: 'My'
+      }
+    end
 
     it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error) }
   end
 
   describe 'when empty certificate location is provided' do
     let(:title) { 'certificate-testCert' }
-    let(:params) { {
-      name: 'testCert',
-      password: 'testPass',
-      location: '',
-      thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-      root_store: 'LocalMachine',
-      store_dir: 'My',
-    }}
+    let(:params) do
+      {
+        name: 'testCert',
+        password: 'testPass',
+        location: '',
+        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+        root_store: 'LocalMachine',
+        store_dir: 'My'
+      }
+    end
 
-    it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, /Must pass location to sslcertificate/) }
+    it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, %r{Must pass location to sslcertificate}) }
   end
 
   describe 'when no certificate thumbprint is provided' do
     let(:title) { 'certificate-testCert' }
-    let(:params) { {
-      name: 'testCert',
-      password: 'testPass',
-      location: 'C:\SslCertificates',
-      root_store: 'LocalMachine',
-      store_dir: 'My',
-    }}
+    let(:params) do
+      {
+        name: 'testCert',
+        password: 'testPass',
+        location: 'C:\SslCertificates',
+        root_store: 'LocalMachine',
+        store_dir: 'My'
+      }
+    end
 
     it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error) }
   end
