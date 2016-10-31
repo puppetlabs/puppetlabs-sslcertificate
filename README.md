@@ -1,5 +1,12 @@
 # SSL Certificate module for Puppet
 
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-sslcert.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-sslcert)
+[![Code Coverage](https://coveralls.io/repos/github/voxpupuli/puppet-sslcert/badge.svg?branch=master)](https://coveralls.io/github/voxpupuli/puppet-sslcert)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/sslcert.svg)](https://forge.puppetlabs.com/puppet/sslcert)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/sslcert.svg)](https://forge.puppetlabs.com/puppet/sslcert)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/sslcert.svg)](https://forge.puppetlabs.com/puppet/sslcert)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/sslcert.svg)](https://forge.puppetlabs.com/puppet/sslcert)
+
 #### Table of Contents
 
 1. [Overview](#overview)
@@ -15,8 +22,6 @@
 ## Overview
 
 Small defined type that will allow you to manage Windows certificates.
-
-[![Build Status](https://travis-ci.org/opentable/puppet-sslcert.png?branch=master)](https://travis-ci.org/opentable/puppet-sslcert)
 
 ## Module Description
 
