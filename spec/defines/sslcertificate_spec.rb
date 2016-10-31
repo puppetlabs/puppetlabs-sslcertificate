@@ -15,7 +15,7 @@ describe 'sslcertificate', type: :define do
     end
 
     it do
-      should contain_exec('Install-testCert-SSLCert').with(
+      is_expected.to contain_exec('Install-testCert-SSLCert').with(
         'command'  => 'c:\temp\import-testCert.ps1',
         'onlyif'   => 'c:\temp\inspect-testCert.ps1',
         'provider' => 'powershell'
@@ -23,23 +23,23 @@ describe 'sslcertificate', type: :define do
     end
 
     it do
-      should contain_file('import-testCert-certificate.ps1').with(
+      is_expected.to contain_file('import-testCert-certificate.ps1').with(
         'ensure'  => 'present',
         'path'    => 'C:\\temp\\import-testCert.ps1',
         'require' => 'File[C:\temp]'
       )
     end
 
-    it { should contain_file('import-testCert-certificate.ps1').with_content(%r{store.Add}) }
+    it { is_expected.to contain_file('import-testCert-certificate.ps1').with_content(%r{store.Add}) }
 
     it do
-      should contain_file('inspect-testCert-certificate.ps1').with(
+      is_expected.to contain_file('inspect-testCert-certificate.ps1').with(
         'ensure'  => 'present',
         'path'    => 'C:\\temp\\inspect-testCert.ps1',
         'require' => 'File[C:\temp]'
       )
     end
-    it { should contain_file('inspect-testCert-certificate.ps1').with_content(%r{\$installedCert in \$installedCerts}) }
+    it { is_expected.to contain_file('inspect-testCert-certificate.ps1').with_content(%r{\$installedCert in \$installedCerts}) }
   end
 
   describe 'when empty certificate name is provided' do
@@ -55,7 +55,7 @@ describe 'sslcertificate', type: :define do
       }
     end
 
-    it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, %r{Must pass name to sslcertificate}) }
+    it { expect { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, %r{Must pass name to sslcertificate}) }
   end
 
   # TODO: this needs to be corrected
@@ -83,7 +83,7 @@ describe 'sslcertificate', type: :define do
       }
     end
 
-    it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error) }
+    it { expect { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error) }
   end
 
   describe 'when empty certificate location is provided' do
@@ -99,7 +99,7 @@ describe 'sslcertificate', type: :define do
       }
     end
 
-    it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, %r{Must pass location to sslcertificate}) }
+    it { expect { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, %r{Must pass location to sslcertificate}) }
   end
 
   describe 'when no certificate thumbprint is provided' do
@@ -114,6 +114,6 @@ describe 'sslcertificate', type: :define do
       }
     end
 
-    it { expect { should contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error) }
+    it { expect { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error) }
   end
 end
