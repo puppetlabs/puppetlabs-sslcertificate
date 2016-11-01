@@ -1,35 +1,40 @@
-# puppet-sslcert
+# SSL Certificate module for Puppet
 
-####Table of Contents
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-sslcert.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-sslcert)
+[![Code Coverage](https://coveralls.io/repos/github/voxpupuli/puppet-sslcert/badge.svg?branch=master)](https://coveralls.io/github/voxpupuli/puppet-sslcert)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/sslcert.svg)](https://forge.puppetlabs.com/puppet/sslcert)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/sslcert.svg)](https://forge.puppetlabs.com/puppet/sslcert)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/sslcert.svg)](https://forge.puppetlabs.com/puppet/sslcert)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/sslcert.svg)](https://forge.puppetlabs.com/puppet/sslcert)
+
+#### Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with sslcert](#setup)
+1. [Module Description - What the module does and why it is useful](#module-description)
+1. [Setup - The basics of getting started with sslcert](#setup)
     * [What sslcert affects](#what-sslcert-affects)
-    * [Setup requirements](#setup-requirements)
     * [Beginning with sslcert](#beginning-with-sslcert)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+1. [Usage - Configuration options and additional functionality](#usage)
+1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+1. [Limitations - OS compatibility, etc.](#limitations)
+1. [Development - Guide for contributing to the module](#development)
 
-##Overview
+## Overview
 
 Small defined type that will allow you to manage Windows certificates.
 
-[![Build Status](https://travis-ci.org/opentable/puppet-sslcert.png?branch=master)](https://travis-ci.org/opentable/puppet-sslcert)
+## Module Description
 
-##Module Description
+A module that will allow you to install and remove your certificates on Windows
+machines. It will manage pfx, cer, der, p7b, sst certificates.
 
-A module that will allow you to install and remove your certificates on Windows machines. It will manage pfx, cer, der, p7b, sst certificates.
+## Setup
 
-##Setup
-
-###What sslcert affects
+### What sslcert affects
 
 * Installs certificates into your Windows key stores
 
-###Beginning with sslcert
+### Beginning with sslcert
 
   To install a certificate in the My directory of the LocalMachine root store:
 
@@ -54,38 +59,49 @@ A module that will allow you to install and remove your certificates on Windows 
     }
 ```
 
-  For more details on the different options available with certificate management directories, see [Windows Dev Center](http://msdn.microsoft.com/en-us/library/windows/desktop/aa388136(v=vs.85).aspx).
+  For more details on the different options available with certificate management
+  directories, see [Windows Dev Center](http://msdn.microsoft.com/en-us/library/windows/desktop/aa388136(v=vs.85).aspx).
 
-##Usage
+## Usage
 
-###Classes and Defined Types
+### Classes and Defined Types
 
-####Defined Type: `sslcert`
-The primary definition of the sslcert module. This definition will install the certificates into your keystore(s)
+#### Defined Type: `sslcert`
+
+The primary definition of the sslcert module. This definition will install the
+certificates into your keystore(s).
 
 **Parameters within `sslcert`:**
-#####`password`
+
+##### `password`
+
 The password for the given certifcate
 
-#####`location`
+##### `location`
+
 The location to store intermediate certificates
 
-#####`thumbprint`
+##### `thumbprint`
+
 The thumbprint used to verify the certifcate
 
-#####`store_dir`
+##### `store_dir`
+
 The certifcate store where the certifcate will be installed to
 
-#####`root_store`
+##### `root_store`
+
 The store location for the given certifcation store. Either LocalMachine or CurrentUser
 
-##Reference
+## Reference
 
-###Defintion
-####Public Definition
+### Defintion
+
+#### Public Definition
+
 * [`sslcert`](#define-sslcert): Guides the installation of certificates
 
-##Limitations
+## Limitations
 
 This module is tested on the following platforms:
 
@@ -93,8 +109,8 @@ This module is tested on the following platforms:
 
 It is tested with the OSS version of Puppet only.
 
-##Development
+## Development
 
-###Contributing
+### Contributing
 
 Please read CONTRIBUTING.md for full details on contributing to this project.
