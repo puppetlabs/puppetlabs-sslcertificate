@@ -2,7 +2,7 @@
 # Copyright:: Copyright (c) 2013 OpenTable Inc
 # License::   MIT
 
-# == Define: sslcertificate
+# == Define: sslcert::sslcertificate
 #
 # This defined type will install SSL Certs on windows
 #
@@ -41,7 +41,7 @@
 #
 # To install a certifcate in an alterntative direcotory:
 #
-#  sslcertificate { "Install-Intermediate-Certificate" :
+#  sslcert::sslcertificate { "Install-Intermediate-Certificate" :
 #    name       => 'go_daddy_intermediate.p7b',
 #    location   => 'C:\',
 #    store_dir  => 'CA',
@@ -49,7 +49,7 @@
 #    thumbprint => '07E5C1AF7F5223CB975CC29B5455642F5570798B'
 #  }
 #
-define sslcertificate($password, $location, $thumbprint, $root_store = 'LocalMachine', $store_dir = 'My') {
+define sslcert::sslcertificate($password, $location, $thumbprint, $root_store = 'LocalMachine', $store_dir = 'My') {
   validate_re($name, '^(.)+$',"Must pass name to ${module_name}[${title}]")
   validate_re($location, '^(.)+$',"Must pass location to ${module_name}[${title}]")
   validate_re($thumbprint, '^(.)+$', "Must pass a certificate thumbprint to ${module_name}[${title}]")
@@ -59,14 +59,14 @@ define sslcertificate($password, $location, $thumbprint, $root_store = 'LocalMac
   file { "inspect-${name}-certificate.ps1" :
     ensure  => present,
     path    => "C:\\temp\\inspect-${name}.ps1",
-    content => template('sslcertificate/inspect.ps1.erb'),
+    content => template('sslcert/inspect.ps1.erb'),
     require => File['C:\temp'],
   }
 
   file { "import-${name}-certificate.ps1" :
     ensure  => present,
     path    => "C:\\temp\\import-${name}.ps1",
-    content => template('sslcertificate/import.ps1.erb'),
+    content => template('sslcert/import.ps1.erb'),
     require => File['C:\temp'],
   }
 
