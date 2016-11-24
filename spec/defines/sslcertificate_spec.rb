@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'sslcertificate', type: :define do
+describe 'sslcert::sslcertificate', type: :define do
   describe 'when managing a ssl certificate' do
     let(:title) { 'certificate-testCert' }
     let(:params) do
@@ -55,7 +55,7 @@ describe 'sslcertificate', type: :define do
       }
     end
 
-    it { expect { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, %r{Must pass name to sslcertificate}) }
+    it { expect { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error) }
   end
 
   # TODO: this needs to be corrected
@@ -99,7 +99,7 @@ describe 'sslcertificate', type: :define do
       }
     end
 
-    it { expect { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error, %r{Must pass location to sslcertificate}) }
+    it { expect { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }.to raise_error(Puppet::Error) }
   end
 
   describe 'when no certificate thumbprint is provided' do
