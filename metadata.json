@@ -1,6 +1,6 @@
 {
   "name": "puppet-sslcertificate",
-  "version": "2.2.1-rc0",
+  "version": "3.0.0-rc0",
   "author": "Vox Pupuli",
   "license": "MIT",
   "summary": "Module to manage SSL Certificates on Windows Server 2008 and upwards",
@@ -31,7 +31,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.8.7 < 5.0.0"
+      "version_requirement": ">= 4.6.1 < 5.0.0"
     }
   ]
 }
