@@ -8,7 +8,7 @@ describe 'sslcertificate', type: :define do
         name: 'testCert',
         password: 'testPass',
         location: 'C:\SslCertificates',
-        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+        thumbprint: '9CFC2688E5C1836F14E5E11D9C8CBEB9006E7426',
         root_store: 'LocalMachine',
         store_dir: 'My'
       }
@@ -42,6 +42,48 @@ describe 'sslcertificate', type: :define do
     it { is_expected.to contain_file('inspect-testCert-certificate.ps1').with_content(%r{\$installedCert in \$installedCerts}) }
   end
 
+ describe 'when managing a ssl certificate specifying a directory for scripts' do
+    let(:title) { 'certificate-testCert' }
+    let(:params) do
+      {
+        name: 'testCert',
+        password: 'testPass',
+        location: 'C:\SslCertificates',
+        thumbprint: '9CFC2688E5C1836F14E5E11D9C8CBEB9006E7426',
+        root_store: 'LocalMachine',
+        store_dir: 'My',
+	      scripts_dir: 'c:\\scripts'
+      }
+    end
+
+    it do
+      is_expected.to contain_exec('Install-testCert-SSLCert').with(
+        'command'  => 'c:\scripts_dir\import-testCert.ps1',
+        'onlyif'   => 'c:\scripts\inspect-testCert.ps1',
+        'provider' => 'powershell'
+      )
+    end
+
+    it do
+      is_expected.to contain_file('import-testCert-certificate.ps1').with(
+        'ensure'  => 'present',
+        'path'    => 'C:\\scripts\\import-testCert.ps1',
+        'require' => 'File[C:\scripts]'
+      )
+    end
+
+    it { is_expected.to contain_file('import-testCert-certificate.ps1').with_content(%r{store.Add}) }
+
+    it do
+      is_expected.to contain_file('inspect-testCert-certificate.ps1').with(
+        'ensure'  => 'present',
+        'path'    => 'C:\\scripts\\inspect-testCert.ps1',
+        'require' => 'File[C:\scripts]'
+      )
+    end
+    it { is_expected.to contain_file('inspect-testCert-certificate.ps1').with_content(%r{\$installedCert in \$installedCerts}) }
+  end
+
   describe 'when empty certificate name is provided' do
     let(:title) { 'certificate-testCert' }
     let(:params) do
@@ -49,7 +91,7 @@ describe 'sslcertificate', type: :define do
         name: '',
         password: 'testPass',
         location: 'C:\SslCertificates',
-        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+        thumbprint: '9CFC2688E5C1836F14E5E11D9C8CBEB9006E7426',
         root_store: 'LocalMachine',
         store_dir: 'My'
       }
@@ -77,7 +119,7 @@ describe 'sslcertificate', type: :define do
       {
         name: 'testCert',
         password: 'testPass',
-        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+        thumbprint: '9CFC2688E5C1836F14E5E11D9C8CBEB9006E7426',
         root_store: 'LocalMachine',
         store_dir: 'My'
       }
@@ -93,7 +135,7 @@ describe 'sslcertificate', type: :define do
         name: 'testCert',
         password: 'testPass',
         location: '',
-        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+        thumbprint: '9CFC2688E5C1836F14E5E11D9C8CBEB9006E7426',
         root_store: 'LocalMachine',
         store_dir: 'My'
       }
