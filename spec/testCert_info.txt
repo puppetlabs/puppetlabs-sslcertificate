@@ -1,2 +1,0 @@
-thumbprint: 9CFC2688E5C1836F14E5E11D9C8CBEB9006E7426
-password: testPass

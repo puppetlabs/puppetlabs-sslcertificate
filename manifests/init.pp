@@ -32,7 +32,7 @@
 #
 # [*scripts_dir*]
 # The directory where the scripts to verify and install the certificates will be stored.
-# By default is C:\Temp
+# By default is C:\temp
 #
 # === Examples
 #
@@ -63,7 +63,7 @@
 #    password   => 'password123',
 #    location   => 'C:',
 #    thumbprint => '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-#    scripts_dir   => 'C:\\scripts_dir'
+#    scripts_dir   => 'C:\scripts_dir'
 #  }
 #
 define sslcertificate (
@@ -72,7 +72,7 @@ define sslcertificate (
   $thumbprint,
   $root_store       = 'LocalMachine',
   $store_dir        = 'My',
-  $scripts_dir = 'C:\\Temp') {
+  $scripts_dir = 'C:\temp') {
   validate_re($name, '^(.)+$', "Must pass name to ${module_name}[${title}]")
   validate_re($location, '^(.)+$', "Must pass location to ${module_name}[${title}]")
   validate_re($thumbprint, '^(.)+$', "Must pass a certificate thumbprint to ${module_name}[${title}]")

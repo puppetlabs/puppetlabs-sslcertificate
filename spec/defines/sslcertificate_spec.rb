@@ -16,8 +16,8 @@ describe 'sslcertificate', type: :define do
 
     it do
       is_expected.to contain_exec('Install-testCert-SSLCert').with(
-        'command'  => 'c:\temp\import-testCert.ps1',
-        'onlyif'   => 'c:\temp\inspect-testCert.ps1',
+        'command'  => 'C:\temp\import-testCert.ps1',
+        'onlyif'   => 'C:\temp\inspect-testCert.ps1',
         'provider' => 'powershell'
       )
     end
@@ -52,14 +52,14 @@ describe 'sslcertificate', type: :define do
         thumbprint: '9CFC2688E5C1836F14E5E11D9C8CBEB9006E7426',
         root_store: 'LocalMachine',
         store_dir: 'My',
-	      scripts_dir: 'c:\\scripts'
+	      scripts_dir: 'C:\scripts'
       }
     end
 
     it do
       is_expected.to contain_exec('Install-testCert-SSLCert').with(
-        'command'  => 'c:\scripts_dir\import-testCert.ps1',
-        'onlyif'   => 'c:\scripts\inspect-testCert.ps1',
+        'command'  => 'C:\scripts\import-testCert.ps1',
+        'onlyif'   => 'C:\scripts\inspect-testCert.ps1',
         'provider' => 'powershell'
       )
     end
