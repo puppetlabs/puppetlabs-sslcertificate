@@ -42,7 +42,7 @@ describe 'sslcertificate', type: :define do
     it { is_expected.to contain_file('inspect-testCert-certificate.ps1').with_content(%r{\$installedCert in \$installedCerts}) }
   end
 
- describe 'when managing a ssl certificate specifying a directory for scripts' do
+  describe 'when managing a ssl certificate specifying a directory for scripts' do
     let(:title) { 'certificate-testCert' }
     let(:params) do
       {
@@ -52,7 +52,7 @@ describe 'sslcertificate', type: :define do
         thumbprint: '9CFC2688E5C1836F14E5E11D9C8CBEB9006E7426',
         root_store: 'LocalMachine',
         store_dir: 'My',
-	      scripts_dir: 'C:\scripts'
+        scripts_dir: 'C:\scripts'
       }
     end
 
