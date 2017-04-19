@@ -76,5 +76,11 @@ define sslcertificate($password, $location, $thumbprint, $root_store = 'LocalMac
     onlyif    => "c:\\temp\\inspect-${name}.ps1",
     logoutput => true,
     require   => [ File["inspect-${name}-certificate.ps1"], File["import-${name}-certificate.ps1"] ],
+    before    => Exec["Clean-${name}-SSLCert-Scripts"] 
+  }
+
+  exec { "Clean-${name}-SSLCert-Scripts":
+    provider  => powershell,
+    command   => "Remove-Item c:\\temp\\*-${name}.ps1",
   }
 }
