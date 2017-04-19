@@ -58,6 +58,18 @@ machines. It will manage pfx, cer, der, p7b, sst certificates.
     }
 ```
 
+To install a certificate in the My directory of the LocalMachine root store using a different directory to store the scripts:
+
+```puppet
+    sslcertificate { "Install-PFX-Certificate" :
+      name          => 'mycert.pfx',
+      password      => 'password123',
+      location      => 'C:',
+      thumbprint    => '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+      scripts_dir   => 'C:\scripts_dir'
+    }
+```
+
   For more details on the different options available with certificate management
   directories, see [Windows Dev Center](http://msdn.microsoft.com/en-us/library/windows/desktop/aa388136(v=vs.85).aspx).
 
@@ -78,7 +90,8 @@ The password for the given certifcate
 
 ##### `location`
 
-The location to store intermediate certificates
+The location where the file certificate is.
+Do not end the string with any forward or backslash.
 
 ##### `thumbprint`
 
@@ -91,6 +104,10 @@ The certifcate store where the certifcate will be installed to
 ##### `root_store`
 
 The store location for the given certifcation store. Either LocalMachine or CurrentUser
+
+##### `scripts_dir`
+
+The directory where the scripts to verify and install the certificates will be stored. By default is C:\temp
 
 ## Reference
 
