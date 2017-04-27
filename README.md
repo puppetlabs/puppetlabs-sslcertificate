@@ -77,7 +77,7 @@ To install a certificate in the My directory of the LocalMachine root store and 
       password       => 'password123',
       location       => 'C:',
       thumbprint     => '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-      is_exportable  => false
+      exportable  => false
   }
 ```
 
@@ -120,7 +120,7 @@ The store location for the given certification store. Either LocalMachine or Cur
 
 The directory where the scripts to verify and install the certificates will be stored. By default is C:\temp
 
-##### `is_exportable`
+##### `exportable`
 Flag to set the key as exportable. `true` == exportable; `false` == not exportable. By default is set to `true`.
 
 ## Reference

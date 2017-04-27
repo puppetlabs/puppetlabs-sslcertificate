@@ -75,7 +75,7 @@
 #    password       => 'password123',
 #    location       => 'C:',
 #    thumbprint     => '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-#    is_exportable  => false
+#    exportable  => false
 #  }
 #
 define sslcertificate (
@@ -85,19 +85,18 @@ define sslcertificate (
   $root_store    = 'LocalMachine',
   $store_dir     = 'My',
   $scripts_dir   = 'C:\temp',
-  $is_exportable = true) {
+  $exportable = true) {
   validate_re($name, '^(.)+$', "Must pass name to ${module_name}[${title}]")
   validate_re($location, '^(.)+$', "Must pass location to ${module_name}[${title}]")
   validate_re($thumbprint, '^(.)+$', "Must pass a certificate thumbprint to ${module_name}[${title}]")
 
   ensure_resource('file', $scripts_dir, {
     ensure => directory
-  }
-  )
+  })
 
-  if($is_exportable){
+  if $exportable {
     $key_storage_flags = 'Exportable,PersistKeySet'
-  }else{
+  } else {
     $key_storage_flags = 'PersistKeySet'
   }
 
