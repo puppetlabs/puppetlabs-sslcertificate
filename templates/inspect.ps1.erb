@@ -1,20 +1,20 @@
 $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2
 
-$certificate = gi <%= @location %>\<%= @name %>
+$certificate = gi "<%= @location %>\<%= @name %>"
 switch -regex ($certificate.Extension.ToUpper()) {
     ".CER|.DER|.P12" {
-        $pfx.import("<%= @location %>\\<%= @name %>","<%= @password %>","Exportable,PersistKeySet")
+        $pfx.import("<%= @location %>\<%= @name %>","<%= @password %>","<%= @key_storage_flags %>")
     }
     ".CRT" {
-        $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\\<%= @name %>"))
+        $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\<%= @name %>"))
     }
     ".P7B|.SST" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
-        $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\\<%= @name %>"))
+        $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\<%= @name %>"))
     }
     ".PFX" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
-        $pfx.import("<%= @location %>\\<%= @name %>","<%= @password %>","Exportable,PersistKeySet")
+        $pfx.import("<%= @location %>\<%= @name %>","<%= @password %>","<%= @key_storage_flags %>")
     }
 }
 
