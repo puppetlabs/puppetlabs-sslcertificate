@@ -105,6 +105,7 @@ define sslcertificate (
     path    => "${scripts_dir}\\inspect-${name}.ps1",
     content => template('sslcertificate/inspect.ps1.erb'),
     require => File[$scripts_dir],
+    mode    => '0600',
   }
 
   file { "import-${name}-certificate.ps1":
@@ -112,6 +113,7 @@ define sslcertificate (
     path    => "${scripts_dir}\\import-${name}.ps1",
     content => template('sslcertificate/import.ps1.erb'),
     require => File[$scripts_dir],
+    mode    => '0600',
   }
 
   exec { "Install-${name}-SSLCert":
