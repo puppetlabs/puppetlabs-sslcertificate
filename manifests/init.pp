@@ -79,11 +79,11 @@
 #  }
 #
 define sslcertificate (
-  String $password,
-  String $location,
-  String $thumbprint,
-  String $root_store               = 'LocalMachine',
-  String $store_dir                = 'My',
+  String[1] $password,
+  String[1] $location,
+  String[1] $thumbprint,
+  String[1] $root_store            = 'LocalMachine',
+  String[1] $store_dir             = 'My',
   Stdlib::Windowspath $scripts_dir = 'C:\temp',
   Boolean $exportable              = true
 ) {
