@@ -82,10 +82,10 @@ define sslcertificate (
   String $password,
   String $location,
   String $thumbprint,
-  $root_store    = 'LocalMachine',
-  $store_dir     = 'My',
-  $scripts_dir   = 'C:\temp',
-  $exportable = true
+  String $root_store               = 'LocalMachine',
+  String $store_dir                = 'My',
+  Stdlib::Windowspath $scripts_dir = 'C:\temp',
+  Boolean $exportable              = true
 ) {
 
   ensure_resource('file', $scripts_dir, {
