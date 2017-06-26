@@ -1,6 +1,6 @@
 {
   "name": "puppet-sslcertificate",
-  "version": "3.0.0-rc0",
+  "version": "3.0.0",
   "author": "Vox Pupuli",
   "license": "MIT",
   "summary": "Module to manage SSL Certificates on Windows Server 2008 and upwards",
