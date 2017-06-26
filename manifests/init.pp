@@ -79,16 +79,14 @@
 #  }
 #
 define sslcertificate (
-  $password,
-  $location,
-  $thumbprint,
-  $root_store    = 'LocalMachine',
-  $store_dir     = 'My',
-  $scripts_dir   = 'C:\temp',
-  $exportable = true) {
-  validate_re($name, '^(.)+$', "Must pass name to ${module_name}[${title}]")
-  validate_re($location, '^(.)+$', "Must pass location to ${module_name}[${title}]")
-  validate_re($thumbprint, '^(.)+$', "Must pass a certificate thumbprint to ${module_name}[${title}]")
+  String[1] $password,
+  String[1] $location,
+  String[1] $thumbprint,
+  String[1] $root_store            = 'LocalMachine',
+  String[1] $store_dir             = 'My',
+  Stdlib::Windowspath $scripts_dir = 'C:\temp',
+  Boolean $exportable              = true
+) {
 
   ensure_resource('file', $scripts_dir, {
     ensure => directory
