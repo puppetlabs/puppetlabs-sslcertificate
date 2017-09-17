@@ -1,8 +1,15 @@
-# Change log
+# Changelog
 
 All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
-These should not impact the functionality of the module.
+These should not affect the functionality of the module.
+
+## [v3.1.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v3.1.0) (2017-09-17)
+[Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v3.0.0...v3.1.0)
+
+**Merged pull requests:**
+
+- Update import.ps1.erb to work with P12 format [\#48](https://github.com/voxpupuli/puppet-sslcertificate/pull/48) ([tramaswami](https://github.com/tramaswami))
 
 ## [v3.0.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v3.0.0) (2017-06-26)
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v2.2.0...v3.0.0)
@@ -22,6 +29,7 @@ These should not impact the functionality of the module.
 
 **Merged pull requests:**
 
+- release 3.0.0 [\#55](https://github.com/voxpupuli/puppet-sslcertificate/pull/55) ([bastelfreak](https://github.com/bastelfreak))
 - replace validate\_\* with puppet4 datatypes [\#52](https://github.com/voxpupuli/puppet-sslcertificate/pull/52) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [v2.2.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v2.2.0) (2017-02-11)
