@@ -4,14 +4,26 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.2.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v3.2.0) (2017-11-20)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v3.1.0...v3.2.0)
+
+**Merged pull requests:**
+
+- bump puppet version dependency to \>= 4.7.1 \< 6.0.0 [\#59](https://github.com/voxpupuli/puppet-sslcertificate/pull/59) ([bastelfreak](https://github.com/bastelfreak))
+- release 3.1.0 [\#57](https://github.com/voxpupuli/puppet-sslcertificate/pull/57) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v3.1.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v3.1.0) (2017-09-17)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v3.0.0...v3.1.0)
 
 **Merged pull requests:**
 
+- release 3.0.0 [\#55](https://github.com/voxpupuli/puppet-sslcertificate/pull/55) ([bastelfreak](https://github.com/bastelfreak))
 - Update import.ps1.erb to work with P12 format [\#48](https://github.com/voxpupuli/puppet-sslcertificate/pull/48) ([tramaswami](https://github.com/tramaswami))
 
 ## [v3.0.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v3.0.0) (2017-06-26)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v2.2.0...v3.0.0)
 
 **Implemented enhancements:**
@@ -29,10 +41,10 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- release 3.0.0 [\#55](https://github.com/voxpupuli/puppet-sslcertificate/pull/55) ([bastelfreak](https://github.com/bastelfreak))
 - replace validate\_\* with puppet4 datatypes [\#52](https://github.com/voxpupuli/puppet-sslcertificate/pull/52) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [v2.2.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v2.2.0) (2017-02-11)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v2.1.1...v2.2.0)
 
 **Closed issues:**
@@ -58,15 +70,19 @@ These should not affect the functionality of the module.
 - Added support for managing .P12 certificates [\#4](https://github.com/voxpupuli/puppet-sslcertificate/pull/4) ([Mharlin](https://github.com/Mharlin))
 
 ## [v2.1.1](https://github.com/voxpupuli/puppet-sslcertificate/tree/v2.1.1) (2015-03-24)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v2.1.0...v2.1.1)
 
 ## [v2.1.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v2.1.0) (2014-10-13)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v2.0.2...v2.1.0)
 
 ## [v2.0.2](https://github.com/voxpupuli/puppet-sslcertificate/tree/v2.0.2) (2014-08-04)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v2.0.1...v2.0.2)
 
 ## [v2.0.1](https://github.com/voxpupuli/puppet-sslcertificate/tree/v2.0.1) (2014-08-04)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v2.0.0...v2.0.1)
 
 **Merged pull requests:**
@@ -74,6 +90,7 @@ These should not affect the functionality of the module.
 - Adding more pupept version coverage to the module [\#6](https://github.com/voxpupuli/puppet-sslcertificate/pull/6) ([stack72](https://github.com/stack72))
 
 ## [v2.0.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v2.0.0) (2014-04-16)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v1.0.1...v2.0.0)
 
 **Merged pull requests:**
@@ -81,9 +98,13 @@ These should not affect the functionality of the module.
 - Moving to use certificate thumbprints [\#5](https://github.com/voxpupuli/puppet-sslcertificate/pull/5) ([stack72](https://github.com/stack72))
 
 ## [v1.0.1](https://github.com/voxpupuli/puppet-sslcertificate/tree/v1.0.1) (2014-03-14)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v1.0.0...v1.0.1)
 
 ## [v1.0.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v1.0.0) (2014-03-12)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/67919d208e50ac9156ecda32e09c4efc5ca6fca8...v1.0.0)
+
 **Merged pull requests:**
 
 - Intermediate certificates [\#3](https://github.com/voxpupuli/puppet-sslcertificate/pull/3) ([stack72](https://github.com/stack72))
