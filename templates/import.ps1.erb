@@ -34,6 +34,6 @@ foreach($cert in $pfx) {
   }
 }
 
-
-
 $store.close()
+
+Remove-Item $MyINvocation.InvocationName
