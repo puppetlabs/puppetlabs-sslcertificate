@@ -132,6 +132,7 @@ describe 'sslcertificate', type: :define do
       {
         name:       'testCert',
         location:   'C:\SslCertificates',
+        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
         root_store: 'LocalMachine',
         store_dir:  'My'
       }
