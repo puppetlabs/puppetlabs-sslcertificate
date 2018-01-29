@@ -79,7 +79,7 @@
 #  }
 #
 define sslcertificate (
-  String[1] $password,
+  Optional[String[1]] $password,
   String[1] $location,
   String[1] $thumbprint,
   String[1] $root_store            = 'LocalMachine',
