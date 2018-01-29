@@ -29,8 +29,7 @@
 # The store location for the given certifcation store. Either LocalMachine or CurrentUser
 #
 # [*scripts_dir*]
-# The directory where the scripts to verify and install the certificates will be stored.
-# By default is C:\temp
+# This parameter has been deprecated and is no longer used.
 #
 # [*is_exportable*]
 # Flag to set the key as exportable. true == exportable; false == not exportable.
@@ -57,17 +56,6 @@
 #  }
 #
 # To install a certificate in the My directory of the LocalMachine root store
-# using a different directory to store the scripts:
-#
-#  sslcertificate { "Install-PFX-Certificate" :
-#    name         => 'mycert.pfx',
-#    password     => 'password123',
-#    location     => 'C:',
-#    thumbprint   => '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-#    scripts_dir  => 'C:\scripts_dir'
-#  }
-#
-# To install a certificate in the My directory of the LocalMachine root store
 # and set the key as not exportable:
 #
 #  sslcertificate { "Install-PFX-Certificate" :
@@ -88,37 +76,16 @@ define sslcertificate (
   Boolean $exportable              = true
 ) {
 
-  ensure_resource('file', $scripts_dir, {
-    ensure => directory
-  })
-
   if $exportable {
     $key_storage_flags = 'Exportable,PersistKeySet'
   } else {
     $key_storage_flags = 'PersistKeySet'
   }
 
-  file { "inspect-${name}-certificate.ps1":
-    ensure  => present,
-    path    => "${scripts_dir}\\inspect-${name}.ps1",
-    content => template('sslcertificate/inspect.ps1.erb'),
-    require => File[$scripts_dir],
-    mode    => '0600',
-  }
-
-  file { "import-${name}-certificate.ps1":
-    ensure  => present,
-    path    => "${scripts_dir}\\import-${name}.ps1",
-    content => template('sslcertificate/import.ps1.erb'),
-    require => File[$scripts_dir],
-    mode    => '0600',
-  }
-
   exec { "Install-${name}-SSLCert":
     provider  => powershell,
-    command   => "${scripts_dir}\\import-${name}.ps1",
-    onlyif    => "${scripts_dir}\\inspect-${name}.ps1",
+    command   => template('sslcertificate/import.ps1.erb'),
+    onlyif    => template('sslcertificate/inspect.ps1.erb'),
     logoutput => true,
-    require   => [File["inspect-${name}-certificate.ps1"], File["import-${name}-certificate.ps1"]],
   }
 }

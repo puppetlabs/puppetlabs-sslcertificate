@@ -58,18 +58,6 @@ machines. It will manage pfx, cer, der, p7b, sst certificates.
     }
 ```
 
-To install a certificate in the My directory of the LocalMachine root store using a different directory to store the scripts:
-
-```puppet
-    sslcertificate { "Install-PFX-Certificate" :
-      name          => 'mycert.pfx',
-      password      => 'password123',
-      location      => 'C:',
-      thumbprint    => '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-      scripts_dir   => 'C:\scripts_dir'
-    }
-```
-
 To install a certificate in the My directory of the LocalMachine root store and set the key as not exportable:
 ```puppet
     sslcertificate { "Install-PFX-Certificate" :
@@ -118,9 +106,10 @@ The store location for the given certification store. Either LocalMachine or Cur
 
 ##### `scripts_dir`
 
-The directory where the scripts to verify and install the certificates will be stored. By default is C:\temp
+This parameter has been deprecated and isn't used anymore. The scripts aren't saved to disk anymore.
 
 ##### `exportable`
+
 Flag to set the key as exportable. `true` == exportable; `false` == not exportable. By default is set to `true`.
 
 ## Reference
