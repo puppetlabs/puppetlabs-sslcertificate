@@ -137,6 +137,6 @@ describe 'sslcertificate', type: :define do
         store_dir:  'My'
       }
     end
-    it { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }
+    it { is_expected.to contain_exec('Install-testCert-SSLCert') }
   end
 end
