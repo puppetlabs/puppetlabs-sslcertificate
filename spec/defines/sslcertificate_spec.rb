@@ -126,16 +126,14 @@ describe 'sslcertificate', type: :define do
     it { is_expected.to contain_file('inspect-testCert-certificate.ps1').without_content(%r{Exportable,PersistKeySet}) }
   end
 
-  # TODO: this needs to be corrected
-  # describe 'when no certificate password is provided' do
-  #  let(:title) { 'certificate-testCert' }
-  #  let(:params) { {
-  #      :name       => 'testCert',
-  #      :location   => 'C:\SslCertificates',
-  #      :root_store => 'LocalMachine',
-  #      :store_dir  => 'My',
-  #  }}
-  #
-  #  it { expect { should contain_exec('Install-SSL-Certificate-testCert')}.to raise_error(Puppet::Error, /Must pass password to Sslcertificate\[certificate-testCert\]/) }
-  # end
+  describe 'when no certificate password is provided' do
+    let(:title) { 'certificate-testCert' }
+    let(:params) { {
+      :name       => 'testCert',
+      :location   => 'C:\SslCertificates',
+      :root_store => 'LocalMachine',
+      :store_dir  => 'My',
+    }}
+    it is_expected.to contain_exec('Install-SSL-Certificate-testCert')
+  end
 end
