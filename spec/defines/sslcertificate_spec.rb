@@ -128,12 +128,14 @@ describe 'sslcertificate', type: :define do
 
   describe 'when no certificate password is provided' do
     let(:title) { 'certificate-testCert' }
-    let(:params) { {
-      :name       => 'testCert',
-      :location   => 'C:\SslCertificates',
-      :root_store => 'LocalMachine',
-      :store_dir  => 'My',
-    }}
-    it is_expected.to contain_exec('Install-SSL-Certificate-testCert')
+    let(:params) do
+      {
+        name:       'testCert',
+        location:   'C:\SslCertificates',
+        root_store: 'LocalMachine',
+        store_dir:  'My'
+      }
+    end
+    it { is_expected.to contain_exec('Install-SSL-Certificate-testCert') }
   end
 end
