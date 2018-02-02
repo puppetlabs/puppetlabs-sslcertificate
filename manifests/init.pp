@@ -13,20 +13,21 @@
 # === Parameters
 #
 # [*password*]
-# The password for the given certifcate
+# The password for the given certificate
+# By default is undef
 #
 # [*location*]
 # The location to store intermediate certificates.
 # Do not end the string with any forward or backslash.
 #
 # [*thumbprint*]
-# The thumbprint used to verify the certifcate
+# The thumbprint used to verify the certificate
 #
 # [*store_dir*]
-# The certifcate store where the certifcate will be installed to
+# The certificate store where the certificate will be installed to
 #
 # [*root_store*]
-# The store location for the given certifcation store. Either LocalMachine or CurrentUser
+# The store location for the given certification store. Either LocalMachine or CurrentUser
 #
 # [*scripts_dir*]
 # This parameter has been deprecated and is no longer used.
@@ -67,9 +68,9 @@
 #  }
 #
 define sslcertificate (
-  String[1] $password,
   String[1] $location,
   String[1] $thumbprint,
+  Optional[String[1]] $password    = undef,
   String[1] $root_store            = 'LocalMachine',
   String[1] $store_dir             = 'My',
   Stdlib::Windowspath $scripts_dir = 'C:\temp',
