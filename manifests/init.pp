@@ -74,7 +74,8 @@ define sslcertificate (
   String[1] $root_store            = 'LocalMachine',
   String[1] $store_dir             = 'My',
   Stdlib::Windowspath $scripts_dir = 'C:\temp',
-  Boolean $exportable              = true
+  Boolean $exportable              = true,
+  String $grant_user               = '',
 ) {
 
   if $exportable {

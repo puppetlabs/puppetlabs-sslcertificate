@@ -37,3 +37,10 @@ foreach($cert in $pfx) {
 $store.close()
 
 Remove-Item $MyINvocation.InvocationName
+
+if([string]::IsNullOrEmpty("<%= @grant_user %>")) {
+    $keyname=(((gci cert:\<%= @root_store %>\<%= @store_dir %> | ? {$_.thumbprint -like <%= @thumbprint %>}).PrivateKey).CspKeyContainerInfo).UniqueKeyContainerName
+    $fullpath = $env:ProgramData + "\Microsoft\Crypto\RSA\MachineKeys\" + $keyname
+    icacls $fullpath /grant <%= @grant_user %>:RX
+}
+

@@ -60,4 +60,27 @@ describe 'sslcertificate', type: :define do
 
     it { is_expected.to contain_exec('Install-testCert-SSLCert') }
   end
+
+  describe 'when managing a ssl certificate and set a user to access the private key' do
+    let(:title) { 'certificate-testCert-privkey' }
+    let(:params) do
+      {
+        name: 'testCert',
+        password: 'testPass',
+        location: 'C:\SslCertificates',
+        thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
+        root_store: 'LocalMachine',
+        store_dir: 'My',
+        grant_user: 'test-cert-user',
+      }
+    end
+
+    it do
+      is_expected.to contain_exec('Install-testCert-SSLCert').with(
+        'provider' => 'powershell'
+      ).
+        with_command(%r{icacls \$fullpath /grant test-cert-user:RX}).
+        with_onlyif(%r{\$certificate = gi "C:\\SslCertificates\\testCert"})
+    end
+  end
 end
