@@ -71,7 +71,7 @@ describe 'sslcertificate', type: :define do
         thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
         root_store: 'LocalMachine',
         store_dir: 'My',
-        grant_user: 'test-cert-user',
+        grant_user: 'test-cert-user'
       }
     end
 
