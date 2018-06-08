@@ -12,45 +12,32 @@ switch -regex ($certificate.Extension.ToUpper()) {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
         $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\<%= @name %>"))
     }
-    ".PFX" {
+    ".PFX|.PKCS12" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
         $pfx.import("<%= @location %>\<%= @name %>","<%= @password %>","<%= @key_storage_flags %>")
     }
 }
 
-
 $installedCerts = @(Get-ChildItem -R cert:\<%= @root_store %>\<%= @store_dir %>)
-$intermediateCerts = @(Get-ChildItem -R cert:\<%= @root_store %>\CA)
 
 $installedCertCount = 0
-$installedIntermediateCount = 0
 
-
-if (($pfx -ne $null) -and ($installedCerts -ne $null) -and ($intermediateCerts -ne $null)) {
+if (($pfx -ne $null) -and ($installedCerts -ne $null)) {
     foreach($cert in $pfx)
     {
-        if($cert.Thumbprint -ne "<%= @thumbprint %>") {
-            foreach ($intermediate in $intermediateCerts) {
-                if($intermediate.Thumbprint -eq $cert.Thumbprint) {
-                    $installedIntermediateCount ++
-                }
-            }
-        }
-        else {
-            foreach ($installedCert in $installedCerts) {
-                if($installedCert.Thumbprint -eq $cert.Thumbprint) {
-                    $installedCertCount ++
-                }
+        foreach ($installedCert in $installedCerts) {
+            if($installedCert.Thumbprint -eq $cert.Thumbprint) {
+                $installedCertCount ++
             }
         }
     }
 
     # When $pfx.Count is $null, $pfx is an instance of X509Certificate2, not X509Certificate2Collection, so
     # ensure that only a single certificate has been installed.
-    if (($pfx.Count -eq $null) -and ($installedCertCount -eq 1) -and ($installedIntermediateCount -eq 0)) {
+    if (($pfx.Count -eq $null) -and ($installedCertCount -eq 1)) {
         exit 1
     }
-    elseif (($installedCertCount + $installedIntermediateCount) -eq $pfx.Count) {
+    elseif (($installedCertCount) -eq $pfx.Count) {
         exit 1
     }
 }

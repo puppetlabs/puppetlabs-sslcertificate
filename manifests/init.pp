@@ -22,6 +22,10 @@
 # [*thumbprint*]
 # The thumbprint used to verify the certifcate
 #
+# [*friendly_name*]
+# The alias of the certificate... 'friendly_name' is the cert store property in Windows
+# friendly_name => 'SomeCertAlias',
+#
 # [*store_dir*]
 # The certifcate store where the certifcate will be installed to
 #
@@ -32,9 +36,12 @@
 # The directory where the scripts to verify and install the certificates will be stored.
 # By default is C:\temp
 #
-# [*is_exportable*]
-# Flag to set the key as exportable. true == exportable; false == not exportable.
-# By default is set to true.
+# [*keystore_flags*]
+# Flags to set on the keys, such as MachineKeySet, Exportable, or PersistKeySet.  Provide
+# a comma delimted list of flags.
+# To set one flag:         keystore_flags => 'Exportable',
+# To set multiple flags:   keystore_flags => 'Exportable,PersistKeySet',
+#
 # === Examples
 #
 # To install a certificate in the My directory of the LocalMachine root store:
@@ -68,20 +75,22 @@
 #  }
 #
 # To install a certificate in the My directory of the LocalMachine root store
-# and set the key as not exportable:
+# and set the key as exportable:
 #
 #  sslcertificate { "Install-PFX-Certificate" :
 #    name           => 'mycert.pfx',
 #    password       => 'password123',
 #    location       => 'C:',
 #    thumbprint     => '07E5C1AF7F5223CB975CC29B5455642F5570798B',
-#    exportable  => false
+#    keystore_flags => 'exportable',
 #  }
 #
 define sslcertificate (
-  String[1] $password,
+  Sensitive[String] $password,
   String[1] $location,
   String[1] $thumbprint,
+  String keystore_flags,
+  String $friendly_name,
   String[1] $root_store            = 'LocalMachine',
   String[1] $store_dir             = 'My',
   Stdlib::Windowspath $scripts_dir = 'C:\temp',
@@ -91,12 +100,6 @@ define sslcertificate (
   ensure_resource('file', $scripts_dir, {
     ensure => directory
   })
-
-  if $exportable {
-    $key_storage_flags = 'Exportable,PersistKeySet'
-  } else {
-    $key_storage_flags = 'PersistKeySet'
-  }
 
   file { "inspect-${name}-certificate.ps1":
     ensure  => present,

@@ -1,6 +1,7 @@
 $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2
-
 $cert = gi "<%= @location %>\<%= @name %>"
+$friendly_name = '<%= @friendly_name %>'
+$thumbprint = '<%= @thumbprint %>'
 
 switch -regex ($cert.Extension.ToUpper()) {
     ".CER|.DER|.P12" {
@@ -13,27 +14,24 @@ switch -regex ($cert.Extension.ToUpper()) {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
         $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\<%= @name %>"))
     }
-    ".PFX|.P12" {
+    ".PFX|.PKCS12" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
         $pfx.import("<%= @location %>\<%= @name %>","<%= @password %>","<%= @key_storage_flags %>")
     }
 }
 
-$store = new-object System.Security.Cryptography.X509Certificates.X509Store("<%= @store_dir %>","<%= @root_store %>")
-$store.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
-
-$intermediatestore = new-object System.Security.Cryptography.X509Certificates.X509Store("CA","<%= @root_store %>")
-$intermediatestore.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
-
-foreach($cert in $pfx) {
-  if($cert.Thumbprint -ne "<%= @thumbprint %>") {
-      $intermediatestore.Add($cert)
+Get-Item -Path cert:\LocalMachine\My, cert:\<%= @root_store %>\<%= @store_dir %> | ForEach-Object {
+  $store = $_
+  $oldcerts = $store | Get-ChildItem | Where-Object {($_.FriendlyName -eq "$friendly_name") -OR ($_.Thumbprint -eq "$thumbprint")}
+  $store.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
+  $oldcerts | ForEach-Object {
+    if($_){$store.Remove($_)}
   }
-  else {
+
+  foreach($cert in $pfx) {
+    if($cert.Thumbprint -ne "$thumbprint") {
       $store.Add($cert)
+    }
   }
+  $store.close()
 }
-
-
-
-$store.close()
