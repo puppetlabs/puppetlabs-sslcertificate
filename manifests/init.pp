@@ -74,11 +74,16 @@ define sslcertificate (
   String[1] $root_store            = 'LocalMachine',
   String[1] $store_dir             = 'My',
   Stdlib::Windowspath $scripts_dir = 'C:\temp',
-  Boolean $exportable              = true
+  Boolean $exportable              = true,
+  Optional[Boolean] $wildcard      = false
 ) {
 
   if $exportable {
-    $key_storage_flags = 'Exportable,PersistKeySet'
+    if $wildcard {
+      $key_storage_flags = 'MachineKeySet,Exportable,PersistKeySet'
+    } else {
+      $key_storage_flags = 'Exportable,PersistKeySet'
+    }
   } else {
     $key_storage_flags = 'PersistKeySet'
   }
