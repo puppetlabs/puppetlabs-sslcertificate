@@ -116,6 +116,11 @@ Flag to set the key as exportable. `true` == exportable; `false` == not exportab
 
 Flag to set the MachineKeySet flag in import, used for importing wildcard certificates. Defaults to `false`
 
+##### `interstore`
+
+If this is set to `true`, any intermediate certificates included will be imported in the same store_dir, not the intermediate store.
+Defaults to `false`
+
 ## Reference
 
 ### Definition

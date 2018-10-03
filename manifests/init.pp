@@ -75,7 +75,8 @@ define sslcertificate (
   String[1] $store_dir             = 'My',
   Stdlib::Windowspath $scripts_dir = 'C:\temp',
   Boolean $exportable              = true,
-  Optional[Boolean] $wildcard      = false
+  Optional[Boolean] $wildcard      = false,
+  Optional[Boolean] $interstore    = false
 ) {
 
   if $exportable {
