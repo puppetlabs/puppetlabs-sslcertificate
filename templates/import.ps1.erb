@@ -25,15 +25,18 @@ $store.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite
 $intermediatestore = new-object System.Security.Cryptography.X509Certificates.X509Store("CA","<%= @root_store %>")
 $intermediatestore.open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
 
+<% if @interstore == true %>
+foreach($cert in $pfx) {
+    $store.Add($cert)
+}
+<% else %>
 foreach($cert in $pfx) {
   if($cert.Thumbprint -ne "<%= @thumbprint %>") {
-      $intermediatestore.Add($cert)
-  }
-  else {
-      $store.Add($cert)
+    $intermediatestore.Add($cert)
+  } else {
+    $store.Add($cert)
   }
 }
+<% end %>
 
 $store.close()
-
-Remove-Item $MyINvocation.InvocationName

@@ -112,6 +112,15 @@ This parameter has been deprecated and isn't used anymore. The scripts aren't sa
 
 Flag to set the key as exportable. `true` == exportable; `false` == not exportable. By default is set to `true`.
 
+##### `wildcard`
+
+Flag to set the MachineKeySet flag in import, used for importing wildcard certificates. Defaults to `false`
+
+##### `interstore`
+
+If this is set to `true`, any intermediate certificates included will be imported in the same store_dir, not the intermediate store.
+Defaults to `false`
+
 ## Reference
 
 ### Definition
