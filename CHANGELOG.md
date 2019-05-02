@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v4.0.0) (2019-03-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v3.4.0...v4.0.0)
+
+**Breaking changes:**
+
+- modulesync 2.5.1 & drop Puppet 4 [\#88](https://github.com/voxpupuli/puppet-sslcertificate/pull/88) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add wildcard & bypass Intermediate Store support [\#84](https://github.com/voxpupuli/puppet-sslcertificate/pull/84) ([arthurbarton](https://github.com/arthurbarton))
+
+**Fixed bugs:**
+
+- PrivateKey directory is filling up [\#33](https://github.com/voxpupuli/puppet-sslcertificate/issues/33)
+- Checks if the certificate is installed without creating an object [\#70](https://github.com/voxpupuli/puppet-sslcertificate/pull/70) ([cmezzett](https://github.com/cmezzett))
+
+**Merged pull requests:**
+
+- modulesync 2.2.0 and allow puppet 6.x [\#85](https://github.com/voxpupuli/puppet-sslcertificate/pull/85) ([bastelfreak](https://github.com/bastelfreak))
+- Do not remove scripts as they are not stored on disk [\#76](https://github.com/voxpupuli/puppet-sslcertificate/pull/76) ([walkamongus](https://github.com/walkamongus))
+
 ## [v3.4.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v3.4.0) (2018-09-07)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v3.3.0...v3.4.0)
@@ -66,6 +88,7 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
+- release 3.0.0 [\#55](https://github.com/voxpupuli/puppet-sslcertificate/pull/55) ([bastelfreak](https://github.com/bastelfreak))
 - replace validate\_\* with puppet4 datatypes [\#52](https://github.com/voxpupuli/puppet-sslcertificate/pull/52) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [v2.2.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v2.2.0) (2017-02-11)
