@@ -1,7 +1,6 @@
 $is_already_installed = Get-ChildItem -Path cert:\<%= @root_store %>\<%= @store_dir %> -Recurse  | select thumbprint | where { $_.thumbprint -eq '<%= @thumbprint %>' }
 
 if ([string]::IsNullOrEmpty($is_already_installed) -eq $False) {
-    Remove-Item $MyINvocation.InvocationName
     exit 1
 }
 
