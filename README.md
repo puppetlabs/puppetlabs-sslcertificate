@@ -91,6 +91,16 @@ The password for the given certificate
 
 The location where the file certificate is.
 Do not end the string with any forward or backslash.
+Note that in puppet manifests, double-backslashes must be re-doubled, even in single-quoted strings, e.g.
+
+```puppet
+    sslcertificate { "Install-PFX-Certificate from UNC path" :
+      name       => 'mycert.pfx',
+      password   => 'password123',
+      location   => '\\\\StorageServer\Fileshare',
+      thumbprint => '07E5C1AF7F5223CB975CC29B5455642F5570798B'
+    }
+```
 
 ##### `thumbprint`
 
