@@ -4,7 +4,27 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v4.0.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v4.0.0) (2019-03-09)
+## [v4.1.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v4.1.0) (2020-01-14)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v4.0.0...v4.1.0)
+
+**Closed issues:**
+
+- Cannot install from UNC drive share [\#99](https://github.com/voxpupuli/puppet-sslcertificate/issues/99)
+- Needs to be idempotent [\#22](https://github.com/voxpupuli/puppet-sslcertificate/issues/22)
+- forge page is confusing [\#14](https://github.com/voxpupuli/puppet-sslcertificate/issues/14)
+- Intermediate store isn't closed after import. [\#12](https://github.com/voxpupuli/puppet-sslcertificate/issues/12)
+- Add secure password capabilities [\#7](https://github.com/voxpupuli/puppet-sslcertificate/issues/7)
+
+**Merged pull requests:**
+
+- ISSUE-99: Add note explaining redoubled backslashes. [\#100](https://github.com/voxpupuli/puppet-sslcertificate/pull/100) ([pillarsdotnet](https://github.com/pillarsdotnet))
+- ISSUE-12: Close intermediate store after import. [\#98](https://github.com/voxpupuli/puppet-sslcertificate/pull/98) ([pillarsdotnet](https://github.com/pillarsdotnet))
+- Remove duplicate CONTRIBUTING.md file [\#95](https://github.com/voxpupuli/puppet-sslcertificate/pull/95) ([dhoppe](https://github.com/dhoppe))
+- Allow `puppetlabs/stdlib` 6.x [\#93](https://github.com/voxpupuli/puppet-sslcertificate/pull/93) ([cubiclelord](https://github.com/cubiclelord))
+- No need to remove the running temp file [\#91](https://github.com/voxpupuli/puppet-sslcertificate/pull/91) ([johnburns320](https://github.com/johnburns320))
+
+## [v4.0.0](https://github.com/voxpupuli/puppet-sslcertificate/tree/v4.0.0) (2019-05-02)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-sslcertificate/compare/v3.4.0...v4.0.0)
 
