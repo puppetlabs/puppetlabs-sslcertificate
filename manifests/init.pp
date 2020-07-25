@@ -78,7 +78,6 @@ define sslcertificate (
   Boolean $wildcard                = false,
   Boolean $interstore              = false
 ) {
-
   if $exportable {
     if $wildcard {
       $key_storage_flags = 'MachineKeySet,Exportable,PersistKeySet'
