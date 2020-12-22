@@ -24,7 +24,7 @@ Small defined type that will allow you to manage Windows certificates.
 
 ## Module Description
 
-A module that will allow you to install and remove your certificates on Windows
+A module that will allow you to install your certificates on Windows
 machines. It will manage pfx, cer, der, p7b, sst certificates.
 
 ## Setup
