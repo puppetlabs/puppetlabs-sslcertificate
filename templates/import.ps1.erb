@@ -4,7 +4,7 @@ $cert = gi "<%= @location %>\<%= @name %>"
 
 switch -regex ($cert.Extension.ToUpper()) {
     ".CER|.DER|.P12" {
-        $pfx.Import("<%= @location %>\<%= @name %>","<%= @password %>","<%= @key_storage_flags %>")
+        $pfx.Import("<%= @location %>\<%= @name %>","<%= @escaped_password %>","<%= @key_storage_flags %>")
     }
     ".CRT" {
         $pfx.Import([System.IO.File]::ReadAllBytes("<%= @location %>\<%= @name %>"))
@@ -15,7 +15,7 @@ switch -regex ($cert.Extension.ToUpper()) {
     }
     ".PFX|.P12" {
         $pfx = new-object System.Security.Cryptography.X509Certificates.X509Certificate2Collection
-        $pfx.import("<%= @location %>\<%= @name %>","<%= @password %>","<%= @key_storage_flags %>")
+        $pfx.import("<%= @location %>\<%= @name %>","<%= @escaped_password %>","<%= @key_storage_flags %>")
     }
 }
 

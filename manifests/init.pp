@@ -88,6 +88,12 @@ define sslcertificate (
     $key_storage_flags = 'PersistKeySet'
   }
 
+  if $password {
+    $escaped_password = regsubst($password, "[\\$\"]", { '$' => '`$', '"' => '`"' }, 'G')
+  } else {
+    $escaped_password = undef
+  }
+
   exec { "Install-${name}-SSLCert":
     provider  => powershell,
     command   => template('sslcertificate/import.ps1.erb'),
