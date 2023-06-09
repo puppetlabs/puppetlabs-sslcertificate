@@ -1,3 +1,5 @@
+**This module is deprecated. Do not use it anymore**
+
 # SSL Certificate module for Puppet
 
 [![Build Status](https://travis-ci.org/voxpupuli/puppet-sslcertificate.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-sslcertificate)
