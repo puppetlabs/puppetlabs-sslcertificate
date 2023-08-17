@@ -1,20 +1,15 @@
-<!--
-Thank you for contributing to this project!
+## Summary
+Provide a detailed description of all the changes present in this pull request.
 
-- This project has a Contributor Code of Conduct: https://voxpupuli.org/coc/
-- Please check that here is no existing issue or PR that addresses your problem.
-- Our vulnerabilities reporting process is at https://voxpupuli.org/security/
+## Additional Context
+Add any additional context about the problem here. 
+- [ ] Root cause and the steps to reproduce. (If applicable)
+- [ ] Thought process behind the implementation.
 
--->
-#### Pull Request (PR) description
-<!--
-Replace this comment with a description of your pull request.
--->
+## Related Issues (if any)
+Mention any related issues or pull requests.
 
-#### This Pull Request (PR) fixes the following issues
-<!--
-Replace this comment with the list of issues or n/a.
-Use format:
-Fixes #123
-Fixes #124
--->
+## Checklist
+- [ ] 🟢 Spec tests.
+- [ ] 🟢 Acceptance tests.
+- [ ] Manually verified.

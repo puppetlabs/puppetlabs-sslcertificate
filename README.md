@@ -1,12 +1,4 @@
-**This module is deprecated. Do not use it anymore**
-
 # SSL Certificate module for Puppet
-
-[![Build Status](https://travis-ci.org/voxpupuli/puppet-sslcertificate.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-sslcertificate)
-[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/sslcertificate.svg)](https://forge.puppetlabs.com/puppet/sslcertificate)
-[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/sslcertificate.svg)](https://forge.puppetlabs.com/puppet/sslcertificate)
-[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/sslcertificate.svg)](https://forge.puppetlabs.com/puppet/sslcertificate)
-[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/sslcertificate.svg)](https://forge.puppetlabs.com/puppet/sslcertificate)
 
 #### Table of Contents
 
