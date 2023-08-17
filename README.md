@@ -7,6 +7,7 @@
 [![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/sslcertificate.svg)](https://forge.puppetlabs.com/puppet/sslcertificate)
 [![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/sslcertificate.svg)](https://forge.puppetlabs.com/puppet/sslcertificate)
 [![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/sslcertificate.svg)](https://forge.puppetlabs.com/puppet/sslcertificate)
+[![Donated by Vox Pupuli](https://img.shields.io/badge/donated%20by-Vox%20Pupuli-fb7047.svg)](#transfer-notice)
 
 #### Table of Contents
 
@@ -154,3 +155,7 @@ It is tested with the OSS version of Puppet only.
 ### Contributing
 
 Please read CONTRIBUTING.md for full details on contributing to this project.
+
+## Transfer notice
+
+This module was previously maintained by Vox Pupuli. It was migrated to Puppet/Perforce in 2023.
