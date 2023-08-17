@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'sslcertificate', type: :define do
@@ -15,11 +17,11 @@ describe 'sslcertificate', type: :define do
     end
 
     it do
-      is_expected.to contain_exec('Install-testCert-SSLCert').with(
+      expect(subject).to contain_exec('Install-testCert-SSLCert').with(
         'provider' => 'powershell'
-      ).
-        with_command(%r{\$cert = gi "C:\\SslCertificates\\testCert"}).
-        with_onlyif(%r{\$certificate = gi "C:\\SslCertificates\\testCert"})
+      )
+                                                                 .with_command(/\$cert = gi "C:\\SslCertificates\\testCert"/)
+                                                                 .with_onlyif(/\$certificate = gi "C:\\SslCertificates\\testCert"/)
     end
   end
 
@@ -38,11 +40,11 @@ describe 'sslcertificate', type: :define do
     end
 
     it do
-      is_expected.to contain_exec('Install-testCert-SSLCert').with(
+      expect(subject).to contain_exec('Install-testCert-SSLCert').with(
         'provider' => 'powershell'
-      ).
-        with_command(%r{\$cert = gi "C:\\SslCertificates\\testCert"}).
-        with_onlyif(%r{\$certificate = gi "C:\\SslCertificates\\testCert"})
+      )
+                                                                 .with_command(/\$cert = gi "C:\\SslCertificates\\testCert"/)
+                                                                 .with_onlyif(/\$certificate = gi "C:\\SslCertificates\\testCert"/)
     end
   end
 
@@ -50,11 +52,11 @@ describe 'sslcertificate', type: :define do
     let(:title) { 'certificate-testCert' }
     let(:params) do
       {
-        name:       'testCert',
-        location:   'C:\SslCertificates',
+        name: 'testCert',
+        location: 'C:\SslCertificates',
         thumbprint: '07E5C1AF7F5223CB975CC29B5455642F5570798B',
         root_store: 'LocalMachine',
-        store_dir:  'My'
+        store_dir: 'My'
       }
     end
 
@@ -78,11 +80,11 @@ describe 'sslcertificate', type: :define do
     end
 
     it do
-      is_expected.to contain_exec('Install-testCert-SSLCert').with(
+      expect(subject).to contain_exec('Install-testCert-SSLCert').with(
         'provider' => 'powershell'
-      ).
-        with_command(%r{\$cert = gi "C:\\SslCertificates\\testCert"}).
-        with_onlyif(%r{\$certificate = gi "C:\\SslCertificates\\testCert"})
+      )
+                                                                 .with_command(/\$cert = gi "C:\\SslCertificates\\testCert"/)
+                                                                 .with_onlyif(/\$certificate = gi "C:\\SslCertificates\\testCert"/)
     end
   end
 end

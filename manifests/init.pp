@@ -32,9 +32,16 @@
 # [*scripts_dir*]
 # This parameter has been deprecated and is no longer used.
 #
-# [*is_exportable*]
-# Flag to set the key as exportable. true == exportable; false == not exportable.
-# By default is set to true.
+# [*exportable*]
+# This parameter determines whether the certificate key is exportable or not.
+#
+# [*wildcard*]
+# This parameter determines whether the certificate is a wildcard certificate or not.
+#
+# [*interstore*]
+# This parameter determines whether the certificate is an intermediate certificate or not.
+#
+#
 # === Examples
 #
 # To install a certificate in the My directory of the LocalMachine root store:

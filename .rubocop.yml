@@ -1,6 +1,27 @@
----
-# Managed by modulesync - DO NOT EDIT
-# https://voxpupuli.org/docs/updating-files-managed-with-modulesync/
+inherit_from: .rubocop_todo.yml
 
-inherit_gem:
-  voxpupuli-test: rubocop.yml
+require:
+- rubocop-performance
+- rubocop-rspec
+AllCops:
+  NewCops: enable
+  DisplayCopNames: true
+  ExtraDetails: true
+  DisplayStyleGuide: true
+  TargetRubyVersion: '2.6'
+  Include:
+  - "**/*.rb"
+  Exclude:
+  - bin/*
+  - ".vendor/**/*"
+  - "**/Gemfile"
+  - "**/Rakefile"
+  - pkg/**/*
+  - spec/fixtures/**/*
+  - vendor/**/*
+  - "**/Puppetfile"
+  - "**/Vagrantfile"
+  - "**/Guardfile"
+Layout/LineLength:
+  Description: People have wide screens, use them.
+  Max: 260
