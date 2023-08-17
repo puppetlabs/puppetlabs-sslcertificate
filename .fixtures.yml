@@ -1,3 +1,9 @@
 fixtures:
   repositories:
-    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib
+    facts: 'https://github.com/puppetlabs/puppetlabs-facts.git'
+    puppet_agent:
+      repo: 'https://github.com/puppetlabs/puppetlabs-puppet_agent.git'
+      ref: v4.13.0
+    stdlib:  https://github.com/puppetlabs/puppetlabs-stdlib.git
+    powershell: https://github.com/puppetlabs/puppetlabs-powershell.git
+    provision: 'https://github.com/puppetlabs/provision.git'
