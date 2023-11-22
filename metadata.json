@@ -1,6 +1,6 @@
 {
   "name": "puppetlabs-sslcertificate",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "author": "puppetlabs",
   "license": "MIT",
   "summary": "Module to manage SSL Certificates on Windows Server 2008 and upwards",
