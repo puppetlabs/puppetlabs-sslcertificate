@@ -18,10 +18,10 @@ describe 'sslcertificate', type: :define do
 
     it do
       expect(subject).to contain_exec('Install-testCert-SSLCert').with(
-        'provider' => 'powershell'
+        'provider' => 'powershell',
       )
-                                                                 .with_command(/\$cert = gi "C:\\SslCertificates\\testCert"/)
-                                                                 .with_onlyif(/\$certificate = gi "C:\\SslCertificates\\testCert"/)
+                                                                 .with_command(%r{\$cert = gi "C:\\SslCertificates\\testCert"})
+                                                                 .with_onlyif(%r{\$certificate = gi "C:\\SslCertificates\\testCert"})
     end
   end
 
@@ -41,10 +41,10 @@ describe 'sslcertificate', type: :define do
 
     it do
       expect(subject).to contain_exec('Install-testCert-SSLCert').with(
-        'provider' => 'powershell'
+        'provider' => 'powershell',
       )
-                                                                 .with_command(/\$cert = gi "C:\\SslCertificates\\testCert"/)
-                                                                 .with_onlyif(/\$certificate = gi "C:\\SslCertificates\\testCert"/)
+                                                                 .with_command(%r{\$cert = gi "C:\\SslCertificates\\testCert"})
+                                                                 .with_onlyif(%r{\$certificate = gi "C:\\SslCertificates\\testCert"})
     end
   end
 
@@ -81,10 +81,10 @@ describe 'sslcertificate', type: :define do
 
     it do
       expect(subject).to contain_exec('Install-testCert-SSLCert').with(
-        'provider' => 'powershell'
+        'provider' => 'powershell',
       )
-                                                                 .with_command(/\$cert = gi "C:\\SslCertificates\\testCert"/)
-                                                                 .with_onlyif(/\$certificate = gi "C:\\SslCertificates\\testCert"/)
+                                                                 .with_command(%r{\$cert = gi "C:\\SslCertificates\\testCert"})
+                                                                 .with_onlyif(%r{\$certificate = gi "C:\\SslCertificates\\testCert"})
     end
   end
 end

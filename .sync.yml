@@ -1,9 +1,34 @@
 ---
+".gitlab-ci.yml":
+  delete: true
+appveyor.yml:
+  delete: true
+rubocop.yml:
+  include_todos: true
+
+Gemfile:
+  optional:
+    ":development":
+    - gem: github_changelog_generator
+      version: '= 1.15.2'
+spec/spec_helper.rb:
+  mock_with: ":rspec"
+  coverage_report: true
+  spec_overrides:
+  - def regexp_matches(available_parameters)
+  - "  match(available_parameters)"
+  - end
+.gitpod.Dockerfile:
+  unmanaged: false
+.gitpod.yml:
+  unmanaged: false
+.github/workflows/auto_release.yml:
+  unmanaged: false
+.github/workflows/ci.yml:
+  unmanaged: true
+.github/workflows/nightly.yml:
+  unmanaged: true
+.github/workflows/release.yml:
+  unmanaged: false
 .travis.yml:
-  secure: "DDZZtZOEb7mqD81bNzEIQC8FrSIRPO0R0nrPkDGj7E1P1Pr/uhgOVVg58A6bPjsqUPLE7arscf2TtRT9cuqfoZP3bhy/g7j+0w6QnAt1f6bPQ9zNL0sgOGEM1rS2WIjRdkFSFcM/kNtrVRhrYEKgv/vOferkUundP+IRCx5HDnU="
-#spec/spec_helper_acceptance.rb:
-# Temporarily unmanage spec_helper_acceptance (iss. #133)
-#  windows: true
-#  dependencies:
-#    - puppetlabs-stdlib
-#    - puppetlabs-powershell
+  delete: true
