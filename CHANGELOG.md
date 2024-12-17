@@ -5,16 +5,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v5.0.1](https://github.com/puppetlabs/puppetlabs-sslcertificate/tree/v5.0.1) - 2024-12-17
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-sslcertificate/compare/v5.0.0...v5.0.1)
+
+### Fixed
+
+- (CAT-2180) Upgrade rexml to address CVE-2024-49761 [#138](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/138) ([amitkarsale](https://github.com/amitkarsale))
+
 ## [v5.0.0](https://github.com/puppetlabs/puppetlabs-sslcertificate/tree/v5.0.0) - 2023-08-17
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-sslcertificate/compare/v4.1.0...v5.0.0)
 
+### Changed
+
+- Drop Puppet 6 support [#119](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/119) ([bastelfreak](https://github.com/bastelfreak))
+
 ### Added
 
 - Allow stdlib 8.0.0 [#112](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/112) ([smortex](https://github.com/smortex))
-
-### Changed
-- Drop Puppet 6 support [#119](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/119) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [v4.1.0](https://github.com/puppetlabs/puppetlabs-sslcertificate/tree/v4.1.0) - 2020-01-14
 
@@ -32,17 +41,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-sslcertificate/compare/v3.4.0...v4.0.0)
 
+### Changed
+
+- modulesync 2.5.1 & drop Puppet 4 [#88](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/88) ([bastelfreak](https://github.com/bastelfreak))
+
 ### Added
 
 - modulesync 2.2.0 and allow puppet 6.x [#85](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/85) ([bastelfreak](https://github.com/bastelfreak))
 - Add wildcard & bypass Intermediate Store support [#84](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/84) ([arthurbarton](https://github.com/arthurbarton))
 
-### Changed
-- modulesync 2.5.1 & drop Puppet 4 [#88](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/88) ([bastelfreak](https://github.com/bastelfreak))
-
 ### Fixed
 
-- Checks if the certificate is installed without creating an object [#70](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/70) ([crmezzet](https://github.com/crmezzet))
+- Checks if the certificate is installed without creating an object [#70](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/70) ([cmezzetti](https://github.com/cmezzetti))
 
 ## [v3.4.0](https://github.com/puppetlabs/puppetlabs-sslcertificate/tree/v3.4.0) - 2018-09-07
 
