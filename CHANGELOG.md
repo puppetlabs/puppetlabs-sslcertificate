@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v6.0.0](https://github.com/puppetlabs/puppetlabs-sslcertificate/tree/v6.0.0) - 2026-06-28
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-sslcertificate/compare/v5.0.1...v6.0.0)
+
+### Changed
+
+- (CAT-2394) Puppetcore update [#142](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/142) ([LukasAud](https://github.com/LukasAud))
+
+### Other
+
+- (MODULES-11840) Allow puppetlabs/stdlib 10.x [#143](https://github.com/puppetlabs/puppetlabs-sslcertificate/pull/143) ([imaqsood](https://github.com/imaqsood))
+
 ## [v5.0.1](https://github.com/puppetlabs/puppetlabs-sslcertificate/tree/v5.0.1) - 2024-12-17
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-sslcertificate/compare/v5.0.0...v5.0.1)
