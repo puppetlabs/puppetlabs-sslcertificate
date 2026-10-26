@@ -20,7 +20,5 @@ jobs:
     uses: "puppetlabs/cat-github-actions/.github/workflows/module_acceptance.yml@main"
     with:
       ruby_version: "3.2"
-      flags: >-
-        --nightly
-        --latest-agent
+      flags: "--nightly"
     secrets: "inherit"
