@@ -29,3 +29,10 @@ spec/spec_helper.rb:
   unmanaged: false
 .travis.yml:
   delete: true
+.rubocop.yml:
+  # the module has a .rubocop_todo.yml (MODULES-11997 pdk update)
+  include_todos: true
+Rakefile:
+  # puppet-lint checks the module disabled by hand (Rakefile/.puppet-lint.rc) (MODULES-11997 pdk update)
+  extra_disabled_lint_checks:
+  - strict_indent
